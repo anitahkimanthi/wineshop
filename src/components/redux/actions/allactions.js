@@ -9,7 +9,7 @@ import {
 export const fetchWines = () => dispatch => {
 
     const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-    console.log(state)
+    
 
     axios.get(url)
     .then(function (response) {
