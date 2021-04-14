@@ -6,7 +6,7 @@ import {
 } from "./types";
 
 // get all wines from the database
-export const fetchWines = (state=0) => dispatch => {
+export const fetchWines = () => dispatch => {
 
     const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
     console.log(state)
