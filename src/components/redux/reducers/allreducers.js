@@ -1,33 +1,50 @@
 import { 
     FETCHWINES,
-    ADDTOCART
+    ADDTOCART,
+    FILTER_WINES,
+    CHECKOUTREQUIREMENTS,
+    CALCULATE
  } from "../actions/types";
 
  const initialState = {
-     wines : [],
-     productAdded : [],
+     allwines : [],
+     filteredWines : [],
+     cartItems : [],
+     userInfo : [],
+     productsCalculations : []
 }
 
-export const allWinesReducer = (state = initialState, action) =>{
+// save the wines data to store state
+const wineReducer = (state = initialState, action) =>{
     switch(action.type){
         case FETCHWINES:
             return{
                 ...state,
-                wines : action.payload
+                allwines : action.payload
             }
-            default:
-                return state
-    }
-}
-
-export const addToCart = (state = initialState, action) =>{
-    switch(action.type){
+        case FILTER_WINES:
+            return{
+                ...state,
+                filteredWines : action.payload
+            }
         case ADDTOCART:
             return{
                 ...state,
-                productAdded : action.payload
+                cartItems : action.payload
             }
-            default:
-                return state
+        case CHECKOUTREQUIREMENTS:
+            return{
+                ...state,
+                userInfo : action.payload
+            }
+        case CALCULATE:
+            return{
+                ...state,
+                productsCalculations : action.payload
+            }
+        default:
+            return state
     }
 }
+
+export default wineReducer

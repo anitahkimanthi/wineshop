@@ -11,5 +11,5 @@ export const ADDTOCART = "FETCH_MOVIES"
 export const CALCULATE = "CALCULATE"
 
 // checkout
-export const CHECKOUT = "CHECKOUT"
+export const CHECKOUTREQUIREMENTS = "CHECKOUT"
 

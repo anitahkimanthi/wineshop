@@ -1,6 +1,16 @@
 import { combineReducers } from "redux";
-import {allWinesReducer} from "./allreducers";
+import fetchWinesReducer from "./fetchWinesReducer";
+import filterWinesReducer from "./filterWinesReducer";
+import checkoutReqReducer from "./checkoutReqReducer";
+import addToCartReducer  from "./addToCartReducer";
+import calculationReducer from "./calculationReducer";
+       
 
 export default combineReducers({
-    wineData : allWinesReducer,
+    allWInes : fetchWinesReducer,
+    filteredWines : filterWinesReducer,
+    cart : addToCartReducer,
+    userInfo : checkoutReqReducer,
+    calculations : calculationReducer
+
 })

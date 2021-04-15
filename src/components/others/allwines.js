@@ -1,4 +1,4 @@
-import { fetchWines } from "../redux/actions/allactions";
+import { fetchWines } from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 const Wines = (props) =>{
@@ -10,7 +10,7 @@ const Wines = (props) =>{
 }
  
 const mapStateToProps = (state) =>({
-    wines: state.wineData.wines
+    wines: state.allWines
 })
 
 export default connect(mapStateToProps, {fetchWines})(Wines)
