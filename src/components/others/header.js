@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
-import { useHistory } from "react-router-dom";
 
 function Header (props) {
     const [open, setOPen] = useState(false)
@@ -15,8 +14,6 @@ function Header (props) {
         
     }
 
-    let history = useHistory();
-    
     const goToCart = () =>{
         props.history.push("/cart")
     }
