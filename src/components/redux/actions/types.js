@@ -7,6 +7,9 @@ export const FILTER_WINES = "UPDATE_MOVIE"
 // add to cart
 export const ADDTOCART = "FETCH_MOVIES"
 
-// checkout
+// calculate the totals
 export const CALCULATE = "CALCULATE"
+
+// checkout
+export const CHECKOUT = "CHECKOUT"
 
