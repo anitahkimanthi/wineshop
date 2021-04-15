@@ -1,8 +1,29 @@
+import React, { useState } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
-import { List,ListItem, ListItemText } from '@material-ui/core';
+import store from '../redux/store';
+import { useHistory } from "react-router-dom";
 
-const header = () =>{
+function Header (props) {
+    const [open, setOPen] = useState(false)
+
+    const wineCategory = (e) =>{
+        // e.currentTarget.id
+    }
+
+    const dropDown = () => {
+        
+    }
+
+    let history = useHistory();
+    
+    const goToCart = () =>{
+        props.history.push("/cart")
+    }
+
+    const cartCount = store.getState().cart.cartproducts.length
+    console.log(cartCount)
+
     return(
         <div className="row justify-content-center">
             <div className="col-12 col-md-10">
@@ -18,7 +39,7 @@ const header = () =>{
             <div className="row">
                 <div className="col-12 col-md-6 ">
                     <ul className="filter">
-                        <li className="category list-unstyled">
+                        <li className="category list-unstyled" onClick={dropDown}>
                             All categories
                         </li>
                         <li className="orderby list-unstyled">
@@ -26,10 +47,18 @@ const header = () =>{
                         </li>
                     </ul>
 
+                    {open &&
+                    <ul className="category-list" >
+                        <li id="Red" className="category-list-item" onClick={wineCategory}>Red</li>
+                        <li id="whine" className="category-list-item" onClick={wineCategory}>White</li>
+                        <li id="Spakrling" className="category-list-item" onClick={wineCategory}>Spakrling</li>
+                    </ul>
+                    }
+
                 </div>
                 <div className="col-12 col-md-6 text-right cartdiv">
-                    <span className="cart">
-                        <Badge badgeContent={4} color="secondary">
+                    <span className="cart" onClick={goToCart}>
+                        <Badge badgeContent={cartCount} color="secondary">
                             <ShoppingCartIcon/> 
                         </Badge>
                         <label>Cart </label>
@@ -41,4 +70,4 @@ const header = () =>{
     )
 }
 
-export default header
+export default Header

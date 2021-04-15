@@ -1,8 +1,9 @@
+import React, { useState } from 'react';
 import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
-import {useState} from "react"
 import {connect} from "react-redux";
 
-const Wines = (props) =>{
+function Wines (props) {
+    
     const [open, setOpen] = useState(false)
     const [bottleQuantity, setBottleQuantity] = useState("")
     const [caseQuantity, setCaseQuantity] = useState("")
@@ -63,20 +64,20 @@ const Wines = (props) =>{
 
     const wines = props.wines.map((d, i) =>
         <div className="col-12 col-sm-6 col-md-3" key={i}>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
+            <div className="card mb-3">
+                <div className="row g-0">
+                    <div className="col-md-4">
                     <img src={d.image} alt={d.name}/>
                     </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                    <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">
                             {d.no} {d.name}
                         </h5>
-                        <p class="card-text">
+                        <p className="card-text">
                             
                         </p>
-                        <div class="card-text">
+                        <div className="card-text">
                             <div className="bottles">
                                 <h5>Bottles</h5>
                                 <p></p>
