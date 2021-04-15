@@ -7,7 +7,7 @@ import calculationReducer from "./calculationReducer";
        
 
 export default combineReducers({
-    allWInes : fetchWinesReducer,
+    wineData : fetchWinesReducer,
     filteredWines : filterWinesReducer,
     cart : addToCartReducer,
     userInfo : checkoutReqReducer,

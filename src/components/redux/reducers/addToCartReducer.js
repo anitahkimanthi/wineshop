@@ -3,7 +3,7 @@ import {
 } from "../actions/types"
 
 const initialState = {
-    products : []
+    cartproducts : []
 }
 
 // on add to cart button, add the item clicked product
@@ -12,7 +12,7 @@ const addToCartReducer = (state = initialState, action) =>{
         case ADDTOCART:
             return{
                 ...state,
-                products : action.payload
+                cartproducts : action.payload
             }
             default:
                 return state

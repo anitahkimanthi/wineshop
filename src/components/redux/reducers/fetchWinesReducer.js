@@ -1,9 +1,10 @@
 import {
-    FETCHWINES
+    FETCHWINES, FETCH_ERROR
 } from "../actions/types"
 
 const initialState = {
-    allwines : []
+    wines : [],
+    error : ""
 }
 
 // save the wines data to store state
@@ -12,10 +13,15 @@ const fetchWines = (state = initialState, action) =>{
         case FETCHWINES:
             return{
                 ...state,
-                allwines : action.payload
+                wines : action.payload
             }
-            default:
-                return state
+        case FETCH_ERROR:
+            return{
+                ...state,
+                error : action.payload
+            }
+        default:
+            return state
     }
 }
 

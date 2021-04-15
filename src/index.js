@@ -5,35 +5,36 @@ import Header from "./components/others/header";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Home from "./components/others/allwines";
-import SingleWine from "./components/others/singlewine";
-import Authentication from "./components/others/personalDetails";
+import WineDetail from "./components/others/wineDetail";
 import Cart from "./components/others/cart";
 import store from "./components/redux/store";
 
 // import Error from "./components/others/error";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-    Grid
-} from "@material-ui/core";
+// import "bootstrap/dist/js/bootstrap.min.js"
+import "./static/app.css"
 
 const history = createBrowserHistory();
 
 const App = () => {
     return (
-        <Grid xs={12}>
+        <div className="row justify-content-center">
             <Router  history={history}>
-            <Header/>
-            <Grid container xs={12} sm={11} ml={10}>
+            <div className="col-12">
+                <br/>
+                <Header/>
+            </div>
+            
+            <div className="col-12 col-md-10">
                 <Switch>
                     <Route exact path="/" component={Home}/>
-                    <Route path="/single-wine" component={SingleWine}/>
+                    <Route path="/wines" component={WineDetail}/>
                     <Route path="/cart" component={Cart}/>
-                    <Route path="/checkout/requirements" component={Authentication}/>
                     <Route component={Error}/>
                 </Switch>
-            </Grid>
+            </div>
             </Router>
-        </Grid>
+        </div>
     )
 }
 

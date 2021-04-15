@@ -1,4 +1,4 @@
-const SingleWine = () =>{
+const WineDetail = () =>{
     return(
         <div>
 
@@ -6,4 +6,4 @@ const SingleWine = () =>{
     )
 }
 
-export default SingleWine
+export default WineDetail

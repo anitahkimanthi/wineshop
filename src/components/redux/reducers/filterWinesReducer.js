@@ -1,9 +1,11 @@
 import {
+    FILTER_ERROR,
     FILTER_WINES
 } from "../actions/types"
 
 const initialState = {
-    filteredWines : []
+    filteredWines : [],
+    error : ""
 }
 
 // save the wines data to store state
@@ -14,8 +16,13 @@ const filteredWines = (state = initialState, action) =>{
                 ...state,
                 filteredWines : action.payload
             }
-            default:
-                return state
+        case FILTER_ERROR:
+            return{
+                ...state,
+                error : action.payload
+            }
+        default:
+            return state
     }
 }
 
