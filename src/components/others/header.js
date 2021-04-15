@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Header (props) {
-    const [open, setOPen] = useState(false)
+    const [categoryDropDown, setCategoryDropDown] = useState(false)
+    const [oderDropDown, setOderDropDown] = useState(false)
 
     const wineCategory = (e) =>{
         // e.currentTarget.id
@@ -19,7 +22,6 @@ function Header (props) {
     }
 
     const cartCount = store.getState().cart.cartproducts.length
-    console.log(cartCount)
 
     return(
         <div className="row justify-content-center">
@@ -37,14 +39,14 @@ function Header (props) {
                 <div className="col-12 col-md-6 ">
                     <ul className="filter">
                         <li className="category list-unstyled" onClick={dropDown}>
-                            All categories
+                            All categories {categoryDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                         </li>
                         <li className="orderby list-unstyled">
-                            Order by
+                            Order by {oderDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                         </li>
                     </ul>
 
-                    {open &&
+                    {categoryDropDown &&
                     <ul className="category-list" >
                         <li id="Red" className="category-list-item" onClick={wineCategory}>Red</li>
                         <li id="whine" className="category-list-item" onClick={wineCategory}>White</li>
