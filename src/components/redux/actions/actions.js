@@ -24,19 +24,19 @@ export const fetchWines = () => dispatch => {
 }
 
 // add item to cart
-export const addtocart = (countersstate) => dispatch => {
-    dispatch({
-        type: ADDTOCART,
-        payload: countersstate - 5,
-    })
+export const addtocart = (productsDetails) => dispatch => {
+    
 }
 
 // calculate totals and quantity
-export const calculations = (userInputs) => dispatch => {
-    // do the calculation and then dispatch to actions
-    dispatch({
-        type: CALCULATE,
-        payload: userInputs,
-    })
+export const calculations = () => dispatch => {
+    // get items added to cart and add the prices
+    
 }
+
+// user credentials before checkout
+export const checkout = (userInformation) => dispatch => {
+   
+}
+
 
