@@ -14,19 +14,10 @@ function Header (props) {
     const wineCategory = (e) =>{
         // e.currentTarget.id
 
-        const id = e.currentTarget.id
+        const id = e.currentTarget.id.toString()
 
-        props.filterWines()
-        if(id === 1){
-            var category = "red"
-        } else if(id === 2){
-            var category = "white"
-        } else{
-            var category = "sparkling"
-        }
-
-        props.filterWines(category)
-        props.history.push(`/wines-categories/${category}`)
+        props.filterWines(id)
+        props.history.push(`/wines-categories/${id}`)
     }
 
     const dropDown = () => {

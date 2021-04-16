@@ -9,8 +9,7 @@ import WineDetail from "./components/others/wineDetail";
 import Cart from "./components/others/cart";
 import Filter from "./components/others/filtered";
 import store from "./components/redux/store";
-
-// import Error from "./components/others/error";
+import Error from "./components/others/notfound";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js"
 import "./static/app.css"
