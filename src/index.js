@@ -26,7 +26,7 @@ const App = () => {
                 <Header/>
             </div>
             
-            <div className="col-12 col-lg-9">
+            <div className="col-12 col-lg-11 col-xl-9">
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/wines" component={WineDetail}/>
