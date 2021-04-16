@@ -25,9 +25,10 @@ const App = () => {
                 <Header/>
             </div>
             
-            <div className="col-12 col-lg-11 col-xl-9">
+            <div className="col-12 col-lg-11 col-xl-9 wrapper">
                 <Switch>
                     <Route exact path="/" component={Home}/>
+                    <Route path="/all-wines" component={Home}/>
                     <Route path="/wines" component={WineDetail}/>
                     <Route path="/wines-categories" component={Filter}/>
                     <Route path="/cart" component={Cart}/>

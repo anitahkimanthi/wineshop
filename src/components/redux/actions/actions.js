@@ -39,8 +39,7 @@ export const fetchWines = () => dispatch => {
 export const filterWines = (id) => dispatch => {
     dispatch({
         type: FILTER_WINES,
-        // payload: d.tags[0],
-        payload: id
+        payload: id,
     })
 }
 
