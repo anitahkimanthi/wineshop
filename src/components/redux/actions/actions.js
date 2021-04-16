@@ -36,11 +36,10 @@ export const fetchWines = () => dispatch => {
 }
 
 // user credentials before checkout
-export const filterWines = (d) => dispatch => {
+export const filterWines = (id) => dispatch => {
     dispatch({
         type: FILTER_WINES,
-        // payload: d.tags[0],
-        payload: "red"
+        payload: id,
     })
 }
 

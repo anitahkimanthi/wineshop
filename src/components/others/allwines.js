@@ -1,23 +1,22 @@
 import React, { useState,useSelector} from 'react';
 import { withRouter } from "react-router";
-import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
+import { fetchWines, amountsCalculations, addToCart, viewDetails} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Wines (props) {
-
-    const [open, setOpen] = useState(false)
-    const [bottleQuantity, setBottleQuantity] = useState(1)
-    const [caseQuantity, setCaseQuantity] = useState(1)
-    const [bottleTotals, setBottleTotals] = useState("")
-    const [caseTotals, setCaseTotals] = useState("")
+    const [inputValues, setInputValues] = useState({
+        bottleQuantity : "1",
+        caseQuantity : "1",
+        bottleTotals : "",
+        caseTotals : "",
+    })
     
     const fetchData = props.fetchWines();
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-         setOpen = true
-         console.log(open)
-         props.history.push(`/wines/${d.name}`)
+        props.viewDetails();
+        props.history.push(`/wines/${d.name}`)
         
     }
 
@@ -35,12 +34,18 @@ function Wines (props) {
     }
 
     // handle user inputs and change state
-    const handleBottleQuantityInput = (d) =>{
+    const handleBottleQuantityInput = (d, e) =>{
         // set state on change of value
-
+        const {name, value} = e.target
+        console.log(name)
+        setInputValues({
+            ...inputValues,
+            [name] : value
+        })
         // do the calculations as input change
         // save the totals in redux state
-    
+        const {bottleQuantity,bottleTotals,} = inputValues
+
         const bottleData = {
             bottleQuantity,
             bottleTotals,
@@ -50,12 +55,17 @@ function Wines (props) {
     }
 
     // handle user inputs and change state
-    const handleCaseQuantityInput = (d) =>{
+    const handleCaseQuantityInput = (d,e) =>{
         // set state on change of value
+        const {name, value} = e.target
 
+        setInputValues({
+            ...inputValues,
+            [name] : value
+        })
         // do the calculations as input change
         // save the totals in state state
-
+        const {caseQuantity,caseTotals} = inputValues
         const caseData = {
             caseQuantity,
             caseTotals
@@ -88,7 +98,8 @@ function Wines (props) {
                                 <p>${d.cost.bottle}</p>
                                 <input 
                                     type="number" 
-                                    value={bottleQuantity} 
+                                    name="bottleQuantity"
+                                    value={inputValues.bottleQuantity} 
                                     onChange={() => handleBottleQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>
                             </div>
@@ -97,7 +108,8 @@ function Wines (props) {
                                 <p>${d.cost.case}</p>
                                 <input 
                                     type="number" 
-                                    value={caseQuantity} 
+                                    name="caseQuantity"
+                                    value={inputValues.caseQuantity} 
                                     onChange={() => handleCaseQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>
                             </div>
@@ -138,4 +150,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default  connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart}) (Wines)
+export default  connect(mapStateToProps, {fetchWines, viewDetails,amountsCalculations,addToCart}) (Wines)

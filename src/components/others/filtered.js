@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
-import { fetchWines,filterWines, amountsCalculations, addToCart} from "../redux/actions/actions";
+import { fetchWines,filterWines, amountsCalculations, addToCart,viewDetails} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Filter (props) {
@@ -24,8 +24,7 @@ function Filter (props) {
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-        setOpen = true
-        console.log(open)
+        props.viewDetails(d);
         props.history.push(`/wines/${d.name}`)
        
    }
@@ -73,72 +72,122 @@ function Filter (props) {
        props.amountsCalculations(caseData)
    }
 
-    const filteredData = wines.filter(d => d.tags[0] === "red" )
-    console.log(filterData);
 
-   if(props.wines === "")  {
-   const wines = wines.filter((d, i) => d.tags[0].toLowerCase() === searchKeyWord &&
-       <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
-           <div className="no-gutters row cardcontent">
-                   <div className="col-lg-5 wineImage">
-                       <img src={props.imageUrl + d.image} alt={d.name}/>
-                   </div>
-                   
-                   <div className="col-lg-7">
-                   <div className="card-body content">
-                       <h5 className="card-title row">
-                           <b className="col-12">
-                               <span className="number">{d.no}</span> 
-                               <br/>
-                               <span className="name">{d.name}</span>
-                           </b>
-                       </h5>
-                       <br/>
-                       <div className="card-text row">
-                           <div className="bottles col-12 col-md-6">
-                               <h6><b>Bottles</b></h6>
-                               <p>${d.cost.bottle}</p>
-                               <input 
-                                   type="number" 
-                                   value={bottleQuantity} 
-                                   onChange={() => handleBottleQuantityInput(d)}
-                               /> <span className="quantity">QTY</span>
-                           </div>
-                           <div className="case col-12 col-md-6">
-                               <h6><b>Case</b></h6>
-                               <p>${d.cost.case}</p>
-                               <input 
-                                   type="number" 
-                                   value={caseQuantity} 
-                                   onChange={() => handleCaseQuantityInput(d)}
-                               /> <span className="quantity">QTY</span>
-                           </div>
-                       </div>
+    const filteredData = wines.filter(d => d.tags.map(t=> t.toLowerCase()) === searchKeyWord)
 
-                       <div className="cta">
-                           <button className="details" onClick={ () => ShowDetails(d)}>Details</button>
-                           <button className="addtocart" onClick={ () => handleAddToCart(d)}>Add to cart</button>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>        
-   )
-   return (
-       <div className="row winewrapper filter">
-           {wines} hellow
-       </div>
-       ) 
-   } else {
-   return (
-       <div className="row  winewrapper filter">
-           <span className="span">{props.error}</span>
-       </div>
-   ) 
-  }     
+    if(wines.length !== 0 && filteredData.length !== 0 && filteredData !== undefined ) {
+        const products = filteredData.map((d, i) =>
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
+                <div className="no-gutters row cardcontent">
+                        <div className="col-3 col-sm-6 col-md-5 wineImage">
+                        <img src={props.imageUrl + d.image} alt={d.name} className="img-fluid"/>
+                        </div>
+                        
+                        <div className="col-9 col-sm-6 col-md-7">
+                        <div className="card-body content">
+                            <h5 className="card-title row">
+                                <b className="col-12">
+                                    <span className="number">{d.no}</span> 
+                                    <br/>
+                                    <span className="name">{d.name}</span>
+                                </b>
+                            </h5>
+                            <br/>
+                            <div className="card-text row">
+                                <div className="bottles col-12 col-md-6">
+                                    <h6><b>Bottles</b></h6>
+                                    <p>${d.cost.bottle}</p>
+                                    <input 
+                                        type="number" 
+                                        name="bottleQuantity"
+                                        value={bottleQuantity} 
+                                        onChange={() => handleBottleQuantityInput(d)}
+                                    /> <span className="quantity">QTY</span>
+                                </div>
+                                <div className="case col-12 col-md-6">
+                                    <h6><b>Case</b></h6>
+                                    <p>${d.cost.case}</p>
+                                    <input 
+                                        type="number" 
+                                        name="caseQuantity"
+                                        value={caseQuantity} 
+                                        onChange={() => handleCaseQuantityInput(d)}
+                                    /> <span className="quantity">QTY</span>
+                                </div>
+                            </div>
+    
+                            <div className="cta">
+                                <button className="details" onClick={ () => ShowDetails(d)}>Details</button>
+                                <button className="addtocart" onClick={ () => handleAddToCart(d)}>Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+        )
+        return (
+            <div className="row winewrapper allwines">
+                {products}
+            </div>
+            ) 
+        } else {
 
-}
- 
+        const products = wines.map((d, i) =>
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
+                <div className="no-gutters row cardcontent">
+                        <div className="col-3 col-sm-6 col-md-5 wineImage">
+                        <img src={props.imageUrl + d.image} alt={d.name} className="img-fluid"/>
+                        </div>
+                        
+                        <div className="col-9 col-sm-6 col-md-7">
+                        <div className="card-body content">
+                            <h5 className="card-title row">
+                                <b className="col-12">
+                                    <span className="number">{d.no}</span> 
+                                    <br/>
+                                    <span className="name">{d.name}</span>
+                                </b>
+                            </h5>
+                            <br/>
+                            <div className="card-text row">
+                                <div className="bottles col-6">
+                                    <h6><b>Bottles</b></h6>
+                                    <p>${d.cost.bottle}</p>
+                                    <input 
+                                        type="number" 
+                                        value={bottleQuantity} 
+                                        onChange={() => handleBottleQuantityInput(d)}
+                                    /> <span className="quantity">QTY</span>
+                                </div>
+                                <div className="case col-6">
+                                    <h6><b>Case</b></h6>
+                                    <p>${d.cost.case}</p>
+                                    <input 
+                                        type="number" 
+                                        value={caseQuantity} 
+                                        onChange={() => handleCaseQuantityInput(d)}
+                                    /> <span className="quantity">QTY</span>
+                                </div>
+                            </div>
+    
+                            <div className="cta">
+                                <button className="details" onClick={ () => ShowDetails(d)}>Details</button>
+                                <button className="addtocart" onClick={ () => handleAddToCart(d)}>Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>)
+
+            return (
+                <div className="row winewrapper">
+                    {products}
+                </div>
+            ) 
+        } 
+    }
+     
 const mapStateToProps = (state) =>({
     wines : state.wineData.allWines,
     searchKeyWord: state.wineData.searchKeyWord,
@@ -151,4 +200,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, {filterWines,fetchWines, amountsCalculations,addToCart})(Filter)
+export default connect(mapStateToProps, {filterWines,viewDetails,fetchWines, amountsCalculations,addToCart})(Filter)

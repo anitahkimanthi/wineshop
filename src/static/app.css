@@ -6,6 +6,10 @@
 .App{
     background-color: #f0f0f0;
 }
+.wrapper{
+    padding: 0
+}
+
 /* header section */
 .header .topheader a{
  text-decoration: none;
@@ -13,6 +17,13 @@
 }
 .header{
     background-color: #fff;
+}
+.productHeader{
+    padding: 0;
+}
+.filter{
+    padding: 0;
+    color: #929292
 }
 .brand{
     margin-bottom: -5px !important;
@@ -22,13 +33,50 @@
 }
 
 /* filter section and cart */
-.filter{
-    display: flex;
-    color: #929292
+.nopadding{
+    padding: 0
+}
+.header .filterheader a{
+    text-decoration: none;
+    color: #868686;
+    padding: 10px;
+    margin-top: -15px;
+
+}
+.header .filterheader .active{
+    background-color: #ececec;
 }
 
+.filter .showall{
+    background-color: #ffffff;
+}
 .filter .category{
-    margin-right: 20px
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #ececec;
+}
+.filter .category button{
+    border: none;
+    background-color: #d1d1d1;
+    width: 30%;
+    margin-right: 3%;
+    color: #868686
+}
+.filter .orderby{
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #ececec;
+}
+.filter .orderby button{
+    border: none;
+    background-color: #d1d1d1;
+    width: 35%;
+    margin-right: 4%;
+    color: #868686
+}
+.filter .showall{
+    float: right;
+    text-align: right;
 }
 
 .cartdiv{
@@ -41,18 +89,26 @@
 }
 .productHeader{
     /* background: #f0f0f0; */
-    padding-top: 15px;
+    padding: 15px 0 10px 0
 }
 
 /* wines section */
+@media only screen and (max-width: 778px){
+  
+}
+
+@media only screen and (min-width: 778px){
+    
+}
 .winewrapper{
     margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 .content .cta{
     display: flex;
 }
-button{
+.winewrapper button{
     padding: 5px 2px;
     border: none;
     color: #ffffff;

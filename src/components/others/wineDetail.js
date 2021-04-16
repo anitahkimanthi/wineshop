@@ -68,12 +68,13 @@ function WineDetail (props) {
                             </b>
                         </h5>
                         <br/>
-                        <div className="card-text row">
+                         <div className="card-text row">
                             <div className="bottles col-12 col-md-6">
                                 <h6><b>Bottles</b></h6>
                                 <p>${d.cost.bottle}</p>
                                 <input 
                                     type="number" 
+                                    name="bottleQuantity"
                                     value={bottleQuantity} 
                                     onChange={() => handleBottleQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>
@@ -83,6 +84,7 @@ function WineDetail (props) {
                                 <p>${d.cost.case}</p>
                                 <input 
                                     type="number" 
+                                    name="caseQuantity"
                                     value={caseQuantity} 
                                     onChange={() => handleCaseQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>

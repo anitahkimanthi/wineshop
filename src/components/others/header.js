@@ -1,36 +1,30 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
-import {Link} from "react-router-dom"
+import {Link, NavLink} from "react-router-dom"
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {filterWines} from "../redux/actions/actions"
+import {connect} from "react-redux"
 
 function Header (props) {
-    const [categoryDropDown, setCategoryDropDown] = useState(false)
-    const [orderDropDown, setOrderDropDown] = useState(false)
+    const [open, setOpen] = useState(false)
+    const [id, setId] = useState("")
 
     const wineCategory = (e) =>{
         // e.currentTarget.id
 
-        const id = e.currentTarget.id
-
-        props.filterWines()
-        if(id === 1){
-            var category = "red"
-        } else if(id === 2){
-            var category = "white"
-        } else{
-            var category = "sparkling"
-        }
-
-        props.filterWines(category)
-        props.history.push(`/wines-categories/${category}`)
+        const id = e.currentTarget.id.toString()
+        console.log(id)
+        props.filterWines(id)
+        // props.history.push(`/wines-categories/${category}`)
     }
 
     const dropDown = () => {
-        
+        setOpen(!open)
+        console.log(open)
     }
 
     const goToCart = () =>{
@@ -52,28 +46,34 @@ function Header (props) {
                 </div>
             </div>
             <hr className="col-12"/>
-            <div className="col-12 col-md-10 productHeader">
+            <div className="col-12 col-md-9 productHeader">
             <div className="row">
-                <div className="col-12 col-md-6 ">
-                    <ul className="filter">
-                        <li className="category list-unstyled" onClick={dropDown}>
-                            All categories {categoryDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+                <div className="col-12 col-md-4 ">
+                    <ul className="filter row">
+                        <li className="filterheader list-unstyled col-12 nopadding" >
+                           <NavLink to="/wines-categories" activeClassName="active" className="showme col-6" onClick={dropDown}>Show me</NavLink>
+                           <NavLink to="/all-wines" activeClassName="active" className="showall col-6">Show all</NavLink>
                         </li>
-                        <li className="orderby list-unstyled">
-                            Order by {orderDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-                        </li>
-                    </ul>
 
-                    {categoryDropDown &&
-                    <ul className="category-list" >
-                        <li id="1" className="category-list-item" onClick={wineCategory}>Red</li>
-                        <li id="2" className="category-list-item" onClick={wineCategory}>White</li>
-                        <li id="3" className="category-list-item" onClick={wineCategory}>Spakrling</li>
-                    </ul>
-                    }
+                        {open && 
+                        <div className="row">
+                            <li className="category list-unstyled col-12">
+                                <button id="red" className="category-list-item" onClick={wineCategory}>Red</button>
+                                <button id="white" className="category-list-item" onClick={wineCategory}>White</button>
+                                <button id="sparkling" className="category-list-item" onClick={wineCategory}>Spakrling</button>
+                            </li>
 
+                            <li className="orderby list-unstyled col-12">
+                                <span className="orderbytitle">Order by </span>
+                                <button id="price" className="category-list-item" onClick={wineCategory}>price</button>
+                                <button id="vintage" className="category-list-item" onClick={wineCategory}>Vintage</button>
+                            </li>
+                        </div>
+                        }
+
+                    </ul>
                 </div>
-                <div className="col-12 col-md-6 text-right cartdiv">
+                <div className="col-12 col-md-8 text-right cartdiv">
                     <span className="cart" onClick={goToCart}>
                         <Badge badgeContent={cartCount} color="secondary">
                             <ShoppingCartIcon/> 
@@ -86,5 +86,7 @@ function Header (props) {
         </div>
     )
 }
+const mapStateToProps = () => ({
+})
 
-export default Header
+export default connect(mapStateToProps, {filterWines})(Header)
