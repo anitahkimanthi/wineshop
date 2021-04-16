@@ -51,7 +51,9 @@ function Header (props) {
                 <div className="col-12 col-md-4 ">
                     <ul className="filter row">
                         <li className="filterheader list-unstyled col-12 nopadding" >
-                           <NavLink to="/wines-categories" activeClassName="active" className="showme col-6" onClick={dropDown}>Show me</NavLink>
+                           <NavLink to="/wines-categories" activeClassName="active" className="showme col-6" onClick={dropDown}>
+                               Show me {open ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+                            </NavLink>
                            <NavLink to="/all-wines" activeClassName="active" className="showall col-6">Show all</NavLink>
                         </li>
 
