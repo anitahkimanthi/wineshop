@@ -7,6 +7,7 @@ import { createBrowserHistory } from "history";
 import Home from "./components/others/allwines";
 import WineDetail from "./components/others/wineDetail";
 import Cart from "./components/others/cart";
+import Filter from "./components/others/filtered";
 import store from "./components/redux/store";
 
 // import Error from "./components/others/error";
@@ -18,17 +19,18 @@ const history = createBrowserHistory();
 
 const App = () => {
     return (
-        <div className="row justify-content-center">
+        <div className="row justify-content-center App">
             <Router  history={history}>
-            <div className="col-12">
+            <div className="col-12 header">
                 <br/>
                 <Header/>
             </div>
             
-            <div className="col-12 col-md-10">
+            <div className="col-12 col-lg-9">
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/wines" component={WineDetail}/>
+                    <Route path="/wines-categories" component={Filter}/>
                     <Route path="/cart" component={Cart}/>
                     <Route component={Error}/>
                 </Switch>

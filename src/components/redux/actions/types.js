@@ -1,19 +1,24 @@
 // Get wines
-export const FETCHWINES = "POST_MOVIE"
+export const FETCHWINES = "FETCHWINES"
 export const FETCH_ERROR = "FETCH_ERROR"
+export const IMAGES_URL = "IMAGES_URL"
 
 // filter wines
-export const FILTER_WINES = "UPDATE_MOVIE"
+export const FILTER_WINES = "FILTER_WINES"
 export const FILTER_ERROR = "FILTER_ERROR"
 
+// view single product
+export const VIEW_DETAILS = "VIEW_DETAILS"
+
 // add to cart
-export const ADDTOCART = "FETCH_MOVIES"
+export const ADDTOCART = "ADDTOCART"
+export const EMPTY_CART ="EMPTY_CART"
 
 // calculate the totals
-export const CALCULATEAllTOTALS = "CALCULATE"
+export const CALCULATEAllTOTALS = "CALCULATEAllTOTALS"
 
 // checkout
-export const CHECKOUTREQUIREMENTS = "CHECKOUT"
+export const CHECKOUTREQUIREMENTS = "CHECKOUTREQUIREMENTS"
 
 // auto calculation on quantity increase or decrease on single product
 export const SINGLE_WINE_CALCULATION = "SINGLE_WINE_AUTOCALCULATION"

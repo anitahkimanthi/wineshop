@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useSelector} from 'react';
+import { withRouter } from "react-router";
 import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Wines (props) {
-    
+
     const [open, setOpen] = useState(false)
-    const [bottleQuantity, setBottleQuantity] = useState("")
-    const [caseQuantity, setCaseQuantity] = useState("")
+    const [bottleQuantity, setBottleQuantity] = useState(1)
+    const [caseQuantity, setCaseQuantity] = useState(1)
     const [bottleTotals, setBottleTotals] = useState("")
     const [caseTotals, setCaseTotals] = useState("")
     
+    const fetchData = props.fetchWines();
+
     // redirect to the detail page
     const ShowDetails = (d) =>{
          setOpen = true
@@ -22,7 +25,7 @@ function Wines (props) {
     const handleAddToCart = (d) =>{
         
         const userData = {
-            caseQuantity : props.caseQuantity,
+            bottleQuantity : props.caseQuantity,
             caseTotals : props.caseTotals,
             caseQuantity : props.caseQuantity,
             bottleTotals : props.bottleTotals,
@@ -59,64 +62,75 @@ function Wines (props) {
         }
         props.amountsCalculations(caseData)
     }
+    
 
-    console.log(fetchWines())
-
+    if(props.error === "")  {
     const wines = props.wines.map((d, i) =>
-        <div className="col-12 col-sm-6 col-md-3" key={i}>
-            <div className="card mb-3">
-                <div className="row g-0">
-                    <div className="col-md-4">
-                    <img src={d.image} alt={d.name}/>
+        <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
+            <div className="no-gutters row cardcontent">
+                    <div className="col-lg-5 wineImage">
+                    <img src={props.imageUrl + d.image} alt={d.name} className="img-fluid"/>
                     </div>
-                    <div className="col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            {d.no} {d.name}
+                    
+                    <div className="col-lg-7">
+                    <div className="card-body content">
+                        <h5 className="card-title row">
+                            <b className="col-12">
+                                <span className="number">{d.no}</span> 
+                                <br/>
+                                <span className="name">{d.name}</span>
+                            </b>
                         </h5>
-                        <p className="card-text">
-                            
-                        </p>
-                        <div className="card-text">
-                            <div className="bottles">
-                                <h5>Bottles</h5>
-                                <p></p>
+                        <br/>
+                        <div className="card-text row">
+                            <div className="bottles col-12 col-md-6">
+                                <h6><b>Bottles</b></h6>
+                                <p>${d.cost.bottle}</p>
                                 <input 
                                     type="number" 
                                     value={bottleQuantity} 
                                     onChange={() => handleBottleQuantityInput(d)}
-                                />
+                                /> <span className="quantity">QTY</span>
                             </div>
-                            <div className="case">
-                                <h5>Bottles</h5>
-                                <p></p>
+                            <div className="case col-12 col-md-6">
+                                <h6><b>Case</b></h6>
+                                <p>${d.cost.case}</p>
                                 <input 
                                     type="number" 
                                     value={caseQuantity} 
                                     onChange={() => handleCaseQuantityInput(d)}
-                                />
+                                /> <span className="quantity">QTY</span>
                             </div>
                         </div>
 
-                        <button className="details btn" onClick={ () => ShowDetails(d)}>Details</button>
-                        <button className="addtocart btn" onClick={ () => handleAddToCart(d)}>Add to cart</button>
-                    </div>
+                        <div className="cta">
+                            <button className="details" onClick={ () => ShowDetails(d)}>Details</button>
+                            <button className="addtocart" onClick={ () => handleAddToCart(d)}>Add to cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
             
-        )
+    )
+    return (
+        <div className="row winewrapper allwines">
+            {wines}
+        </div>
+        ) 
+    } 
+    return (
+        <div className="row card winewrapper">
+            <span className="span">{props.error}</span>
+        </div>
+    ) 
         
-        return (
-            <div className="justify-content-center card winewrapper">
-                {wines}
-            </div>
-        )
 }
  
 const mapStateToProps = (state) =>({
-    wines: state.wineData.wines,
+    wines: state.wineData.allWines,
+    error : state.wineData.error,
+    imageUrl : state.wineData.imageUrl,
     caseQuantity : state.calculations.singleProductCalculations.caseQuantity,
     caseTotals : state.calculations.singleProductCalculations.caseTotals,
     bottleTotals : state.calculations.singleProductCalculations.bottleTotals,
@@ -124,4 +138,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart})(Wines)
+export default  connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart}) (Wines)

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store';
+import data from "../../data/data"
 import {
     ADDTOCART,
     FETCHWINES,
@@ -7,20 +8,18 @@ import {
     FILTER_WINES,
     FETCH_ERROR,
     SINGLE_WINE_CALCULATION,
-    CALCULATEAllTOTALS
+    CALCULATEAllTOTALS,
+    VIEW_DETAILS
 } from "./types";
 
 // get all wines from the database
 export const fetchWines = () => dispatch => {
 
     const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-    
-    console.log(url)
 
     axios.get(url)
     .then( response =>{
         const data = response.data
-
         dispatch({
             type: FETCHWINES,
             payload: data,
@@ -31,34 +30,26 @@ export const fetchWines = () => dispatch => {
 
         dispatch({
             type: FETCH_ERROR,
-            payload: "Something went wrong!",
+            payload: "Network error!",
         })
     })
 }
 
 // user credentials before checkout
-export const filterWines = (category) => dispatch => {
-    // get wine category and use it to fillter all wines with same name
-    const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-    
-    console.log(url)
-
-    axios.get(url)
-    .then( response =>{
-        const data = response.data.map(d => d.name === category)
-
-        dispatch({
-            type: FILTER_WINES,
-            payload: data,
-        })
+export const filterWines = (d) => dispatch => {
+    dispatch({
+        type: FILTER_WINES,
+        // payload: d.tags[0],
+        payload: "red"
     })
-    .catch(function (error) {
-        console.log(error);
+}
 
-        dispatch({
-            type: FETCH_ERROR,
-            payload: "Something went wrong!",
-        })
+// user credentials before checkout
+export const viewDetails = (d) => dispatch => {
+    // get wine category and use it to fillter all wines with same name
+    dispatch({
+        type: VIEW_DETAILS,
+        payload: d,
     })
 }
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { withRouter } from "react-router";
+import {Link} from "react-router-dom"
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
@@ -7,10 +9,24 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Header (props) {
     const [categoryDropDown, setCategoryDropDown] = useState(false)
-    const [oderDropDown, setOderDropDown] = useState(false)
+    const [orderDropDown, setOrderDropDown] = useState(false)
 
     const wineCategory = (e) =>{
         // e.currentTarget.id
+
+        const id = e.currentTarget.id
+
+        props.filterWines()
+        if(id === 1){
+            var category = "red"
+        } else if(id === 2){
+            var category = "white"
+        } else{
+            var category = "sparkling"
+        }
+
+        props.filterWines(category)
+        props.history.push(`/wines-categories/${category}`)
     }
 
     const dropDown = () => {
@@ -24,12 +40,14 @@ function Header (props) {
     const cartCount = store.getState().cart.cartproducts.length
 
     return(
-        <div className="row justify-content-center">
+        <div className="row justify-content-center header">
             <div className="col-12 col-md-10">
                 <div className="row">
-                    <div className="col-12 text-center">
-                        <h3 className="brand"><b>WineShop</b></h3>
-                        <small>wineshop.com</small>
+                    <div className="col-12 text-center topheader">
+                        <Link to="/">
+                            <h3 className="brand"><b>WineShop</b></h3>
+                            <small>wineshop.com</small>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -42,15 +60,15 @@ function Header (props) {
                             All categories {categoryDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                         </li>
                         <li className="orderby list-unstyled">
-                            Order by {oderDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+                            Order by {orderDropDown ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                         </li>
                     </ul>
 
                     {categoryDropDown &&
                     <ul className="category-list" >
-                        <li id="Red" className="category-list-item" onClick={wineCategory}>Red</li>
-                        <li id="whine" className="category-list-item" onClick={wineCategory}>White</li>
-                        <li id="Spakrling" className="category-list-item" onClick={wineCategory}>Spakrling</li>
+                        <li id="1" className="category-list-item" onClick={wineCategory}>Red</li>
+                        <li id="2" className="category-list-item" onClick={wineCategory}>White</li>
+                        <li id="3" className="category-list-item" onClick={wineCategory}>Spakrling</li>
                     </ul>
                     }
 
