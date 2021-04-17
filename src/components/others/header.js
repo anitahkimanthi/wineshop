@@ -17,7 +17,7 @@ function Header (props) {
     const wineCategory = (e) =>{
         // e.currentTarget.id
         const id = e.currentTarget.id.toString()
-        window.location.href=`/categories/?tag=${id}`
+        props.history.push(`/categories/?tag=${id}`)
     }
 
     const dropDown = () => {
@@ -88,4 +88,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default  connect(mapStateToProps) (Header)
+export default withRouter( connect(mapStateToProps)(Header))

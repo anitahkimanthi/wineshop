@@ -15,7 +15,7 @@ function Wines (props) {
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-        window.location.href= `/wines/?name=${d.name.toLowerCase()}`
+        props.history.push( `/wines/?name=${d.name.toLowerCase()}`)
         
     }
 
@@ -149,4 +149,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default  connect(mapStateToProps, {fetchWines,amountsCalculations,addToCart}) (Wines)
+export default   withRouter(connect(mapStateToProps, {fetchWines,amountsCalculations,addToCart}) (Wines))

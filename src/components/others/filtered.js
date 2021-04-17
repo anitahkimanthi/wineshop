@@ -22,7 +22,7 @@ function Filter (props) {
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-        window.location.href=`/wines/?name=${d.name.toLowerCase()}`
+        props.history.push(`/wines/?name=${d.name.toLowerCase()}`)
        
    }
 
@@ -34,7 +34,6 @@ function Filter (props) {
            caseQuantity : props.caseQuantity,
            bottleTotals : props.bottleTotals,
        }
-
        props.addToCart(d, userData)
    }
 
@@ -158,4 +157,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart})(Filter)
+export default  withRouter(connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart})(Filter))
