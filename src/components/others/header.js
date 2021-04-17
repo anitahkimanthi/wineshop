@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
 import {Link, NavLink} from "react-router-dom"
+import {addToCart} from "../redux/actions/actions";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
@@ -11,10 +12,12 @@ import {connect} from "react-redux"
 function Header (props) {
     const [open, setOpen] = useState(false)
 
+    const {count,addToCart} = props
+
     const wineCategory = (e) =>{
         // e.currentTarget.id
         const id = e.currentTarget.id.toString()
-        props.history.push(`/categories/?tag=${id}`)
+        window.location.href=`/categories/?tag=${id}`
     }
 
     const dropDown = () => {
@@ -25,9 +28,6 @@ function Header (props) {
     const goToCart = () =>{
         props.history.push("/cart")
     }
-
-    const cartCount = store.getState().cart.cartproducts.length
-
     return(
         <div className="row justify-content-center header">
             <div className="col-12 col-md-10">
@@ -72,7 +72,7 @@ function Header (props) {
                 </div>
                 <div className="col-12 col-md-8 text-right cartdiv">
                     <span className="cart" onClick={goToCart}>
-                        <Badge badgeContent={cartCount} color="secondary">
+                        <Badge badgeContent={count} color="secondary">
                             <ShoppingCartIcon/> 
                         </Badge>
                         <label>Cart </label>
@@ -83,4 +83,9 @@ function Header (props) {
         </div>
     )
 }
-export default withRouter (Header)
+const mapStateToProps = (state) =>({
+    count: state.cart.cartproducts.length,
+    
+})
+
+export default  connect(mapStateToProps) (Header)

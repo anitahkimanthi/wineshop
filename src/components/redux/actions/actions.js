@@ -13,39 +13,48 @@ import {
 
 // get all wines from the database
 export const fetchWines = () => dispatch => {
-    const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
 
-    axios.get(url)
-    .then( response =>{
-        const data = response.data
-        dispatch({
-            type: FETCHWINES,
-            payload: data,
-        })
+    dispatch({
+        type: FETCHWINES,
+        payload: data,
     })
-    .catch(error =>{
-        dispatch({
-            type: FETCH_ERROR,
-            payload: "Network error!",
-        })
-    })
+    // const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
+
+    // axios.get(url)
+    // .then( response =>{
+    //     const data = response.data
+    //     dispatch({
+    //         type: FETCHWINES,
+    //         payload: data,
+    //     })
+    // })
+    // .catch(error =>{
+    //     dispatch({
+    //         type: FETCH_ERROR,
+    //         payload: "Network error!",
+    //     })
+    // })
 }
 
 
 // add item to cart
 export const addToCart = (d, userData,) => dispatch => {
     // get the details of the wine clicked and add them to cart (name, price, quantity, and image)
-   const product = {
-       name : d.name,
-       image : d.image,
-       quantity : userData.bottleQuantity,
-       totals : userData.bottleTotals
-   }
+   
+   const pushTocart = store.getState().cart.cartproducts
 
+   const item = new Object()
+    item.id = d.no
+    item.image = d.image
+    item.name = d.name
+    item.quantity = userData.bottleQuantity
+    item.totals = userData.bottleTotals
+
+    pushTocart.push(item)
     // push the product to the cartproducts array
     dispatch({
         type: ADDTOCART,
-        payload: product,
+        payload: pushTocart,
     })
 }
 

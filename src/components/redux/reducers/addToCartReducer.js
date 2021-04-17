@@ -12,7 +12,6 @@ const addToCartReducer = (state = initialState, action) =>{
     switch(action.type){
         case ADDTOCART:
             return{
-                ...state,
                 cartproducts : action.payload
             }
         case EMPTY_CART:
