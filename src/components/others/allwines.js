@@ -8,7 +8,7 @@ function Wines (props) {
         bottleQuantity : "1",
         caseQuantity : "1",
         bottleTotals : "",
-        caseTotals : "",
+        caseTotals : ""
     })
     
     const fetchData = props.fetchWines();
