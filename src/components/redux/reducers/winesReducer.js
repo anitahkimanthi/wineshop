@@ -10,8 +10,6 @@ const initialState = {
     allWines : [],
     error : "",
     imageUrl : "https://storage.googleapis.com/wineshop-assets/wine-bottles/",
-    searchKeyWord : "",
-    selectedProduct : []
 }
 
 // save the wines data to store state
@@ -30,16 +28,6 @@ const fetchWines = (state = initialState, action) =>{
         case FETCH_ERROR:
             return{
                 error : action.payload
-            }
-        case FILTER_WINES:
-            return{
-                ...state,
-                searchKeyWord : action.payload
-            }
-        case VIEW_DETAILS:
-            return{
-                ...state,
-                selectedProduct : action.payload
             }
         default:
             return state

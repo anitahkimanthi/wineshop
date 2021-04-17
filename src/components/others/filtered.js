@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
-import { fetchWines,filterWines, amountsCalculations, addToCart,viewDetails} from "../redux/actions/actions";
+import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Filter (props) {
@@ -12,7 +12,6 @@ function Filter (props) {
     const [caseTotals, setCaseTotals] = useState("")
     
     const {
-        searchKeyWord,
         wines,
         error,
         imageUrl
@@ -20,19 +19,15 @@ function Filter (props) {
     } = props
 
     const fetchData = props.fetchWines();
-    const filterData = props.filterWines();
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-        props.viewDetails(d);
-        props.history.push(`/wines/${d.name}`)
+        window.location.href=`/wines/?name=${d.name.toLowerCase()}`
        
    }
 
    // on click of add to cart button, add to cart
    const handleAddToCart = (d) =>{
-   
-
        const userData = {
            bottleQuantity : props.caseQuantity,
            caseTotals : props.caseTotals,
@@ -72,8 +67,13 @@ function Filter (props) {
        props.amountsCalculations(caseData)
    }
 
+   const query = new URLSearchParams(props.location.search)
+   const searchKeyWord = query.get("tag").toString()
+   const tag = "red"
 
-    const filteredData = wines.filter(d => d.tags.map(t=> t.toLowerCase()) === searchKeyWord)
+    const filteredData = wines.filter(d => d.tags.map(t=> t.toLowerCase()).toString() === searchKeyWord)
+    console.log(filteredData,searchKeyWord)
+    
 
     if(wines.length !== 0 && filteredData.length !== 0 && filteredData !== undefined ) {
         const products = filteredData.map((d, i) =>
@@ -190,7 +190,6 @@ function Filter (props) {
      
 const mapStateToProps = (state) =>({
     wines : state.wineData.allWines,
-    searchKeyWord: state.wineData.searchKeyWord,
     error : state.wineData.error,
     imageUrl : state.wineData.imageUrl,
     caseQuantity : state.calculations.singleProductCalculations.caseQuantity,
@@ -200,4 +199,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, {filterWines,viewDetails,fetchWines, amountsCalculations,addToCart})(Filter)
+export default connect(mapStateToProps, {fetchWines, amountsCalculations,addToCart})(Filter)

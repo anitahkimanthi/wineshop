@@ -15,32 +15,28 @@ import {
 // get all wines from the database
 export const fetchWines = () => dispatch => {
 
-    const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-
-    axios.get(url)
-    .then( response =>{
-        const data = response.data
-        dispatch({
-            type: FETCHWINES,
-            payload: data,
-        })
-    })
-    .catch(function (error) {
-        console.log(error);
-
-        dispatch({
-            type: FETCH_ERROR,
-            payload: "Network error!",
-        })
-    })
-}
-
-// user credentials before checkout
-export const filterWines = (id) => dispatch => {
     dispatch({
-        type: FILTER_WINES,
-        payload: id,
+        type: FETCHWINES,
+        payload : data
     })
+    // const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
+
+    // axios.get(url)
+    // .then( response =>{
+    //     const data = response.data
+    //     dispatch({
+    //         type: FETCHWINES,
+    //         payload: data,
+    //     })
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+
+    //     dispatch({
+    //         type: FETCH_ERROR,
+    //         payload: "Network error!",
+    //     })
+    // })
 }
 
 // user credentials before checkout

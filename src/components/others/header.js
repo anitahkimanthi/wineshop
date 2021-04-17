@@ -6,20 +6,15 @@ import Badge from '@material-ui/core/Badge';
 import store from '../redux/store';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {filterWines} from "../redux/actions/actions"
 import {connect} from "react-redux"
 
 function Header (props) {
     const [open, setOpen] = useState(false)
-    const [id, setId] = useState("")
 
     const wineCategory = (e) =>{
         // e.currentTarget.id
-
         const id = e.currentTarget.id.toString()
-        console.log(id)
-        props.filterWines(id)
-        // props.history.push(`/wines-categories/${category}`)
+        props.history.push(`/categories/?tag=${id}`)
     }
 
     const dropDown = () => {
@@ -51,7 +46,7 @@ function Header (props) {
                 <div className="col-12 col-md-4 ">
                     <ul className="filter row">
                         <li className="filterheader list-unstyled col-12 nopadding" >
-                           <NavLink to="/wines-categories" activeClassName="active" className="showme col-6" onClick={dropDown}>
+                           <NavLink to="/filter" activeClassName="active" className="showme col-6" onClick={dropDown}>
                                Show me {open ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                             </NavLink>
                            <NavLink to="/all-wines" activeClassName="active" className="showall col-6">Show all</NavLink>
@@ -88,7 +83,4 @@ function Header (props) {
         </div>
     )
 }
-const mapStateToProps = () => ({
-})
-
-export default connect(mapStateToProps, {filterWines})(Header)
+export default withRouter (Header)

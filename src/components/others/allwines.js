@@ -15,8 +15,7 @@ function Wines (props) {
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
-        props.viewDetails();
-        props.history.push(`/wines/${d.name}`)
+        window.location.href= `/wines/?name=${d.name.toLowerCase()}`
         
     }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { filterWines, amountsCalculations, addToCart} from "../redux/actions/actions";
+import { amountsCalculations, addToCart} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function WineDetail (props) {
@@ -50,8 +50,12 @@ function WineDetail (props) {
         }
         props.amountsCalculations(caseData)
     }
-    
-    const wines = props.selectedProduct.map((d, i) =>
+
+    const query = new URLSearchParams(props.location.search)
+    const tag = query.get("tag").toString()
+    const filteredData = wines.filter(d => d.name.toLowerCase().toString() === tag)
+
+    const wines = props.filteredData.map((d, i) =>
         <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
             <div className="no-gutters row cardcontent">
                     <div className="col-lg-5 wineImage">
@@ -109,7 +113,6 @@ function WineDetail (props) {
 }
  
 const mapStateToProps = (state) =>({
-    selectedProduct: state.wineData.selectedProduct,
     caseQuantity : state.calculations.singleProductCalculations.caseQuantity,
     caseTotals : state.calculations.singleProductCalculations.caseTotals,
     bottleTotals : state.calculations.singleProductCalculations.bottleTotals,
@@ -117,4 +120,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, {filterWines, amountsCalculations,addToCart})(WineDetail)
+export default connect(mapStateToProps, { amountsCalculations,addToCart})(WineDetail)
