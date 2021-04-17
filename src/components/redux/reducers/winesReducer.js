@@ -1,8 +1,6 @@
 import {
     FETCHWINES, 
     FETCH_ERROR, 
-    FILTER_WINES,
-    VIEW_DETAILS,
     IMAGES_URL
 } from "../actions/types"
 
@@ -14,6 +12,7 @@ const initialState = {
 
 // save the wines data to store state
 const fetchWines = (state = initialState, action) =>{
+    
     switch(action.type){
         case FETCHWINES:
             return{

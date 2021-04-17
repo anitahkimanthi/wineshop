@@ -5,7 +5,6 @@ import {
     ADDTOCART,
     FETCHWINES,
     CHECKOUTREQUIREMENTS,
-    FILTER_WINES,
     FETCH_ERROR,
     SINGLE_WINE_CALCULATION,
     CALCULATEAllTOTALS,
@@ -14,37 +13,21 @@ import {
 
 // get all wines from the database
 export const fetchWines = () => dispatch => {
+    const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
 
-    dispatch({
-        type: FETCHWINES,
-        payload : data
+    axios.get(url)
+    .then( response =>{
+        const data = response.data
+        dispatch({
+            type: FETCHWINES,
+            payload: data,
+        })
     })
-    // const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-
-    // axios.get(url)
-    // .then( response =>{
-    //     const data = response.data
-    //     dispatch({
-    //         type: FETCHWINES,
-    //         payload: data,
-    //     })
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-
-    //     dispatch({
-    //         type: FETCH_ERROR,
-    //         payload: "Network error!",
-    //     })
-    // })
-}
-
-// user credentials before checkout
-export const viewDetails = (d) => dispatch => {
-    // get wine category and use it to fillter all wines with same name
-    dispatch({
-        type: VIEW_DETAILS,
-        payload: d,
+    .catch(error =>{
+        dispatch({
+            type: FETCH_ERROR,
+            payload: "Network error!",
+        })
     })
 }
 

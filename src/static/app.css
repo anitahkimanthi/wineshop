@@ -4,6 +4,7 @@
 
 /* main app styles */
 .App{
+    /* height: 100vh; */
     background-color: #f0f0f0;
 }
 .wrapper{
@@ -21,10 +22,7 @@
 .productHeader{
     padding: 0;
 }
-.filter{
-    padding: 0;
-    color: #929292
-}
+
 .brand{
     margin-bottom: -5px !important;
 }
@@ -33,6 +31,10 @@
 }
 
 /* filter section and cart */
+.filter{
+    padding: 0;
+    color: #929292
+}
 .nopadding{
     padding: 0
 }
@@ -40,15 +42,18 @@
     text-decoration: none;
     color: #868686;
     padding: 10px;
-    margin-top: -15px;
 
 }
 .header .filterheader .active{
     background-color: #ececec;
 }
+.filter .showme{
+    margin-top: -18px;
+}
 
 .filter .showall{
     background-color: #ffffff;
+    margin-top: -10px;
 }
 .filter .category{
     margin-right: 20px;
@@ -99,6 +104,9 @@
 
 @media only screen and (min-width: 778px){
     
+}
+.error{
+    color: red
 }
 .winewrapper{
     margin-top: 10px;
@@ -176,6 +184,7 @@
 
 hr{
     margin-bottom: 0;
+    margin-top:10px
 }
 .cardwrapper{
     background-clip: border-box;
@@ -186,4 +195,12 @@ hr{
 .winewrapper input{
     width: 45%;
     
+}
+
+/* details */
+.details{
+    margin-top: 20px;
+}
+.details .cardwrapper{
+    margin: 0 auto;
 }

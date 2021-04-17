@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { amountsCalculations, addToCart} from "../redux/actions/actions";
+import { 
+    amountsCalculations, 
+    addToCart,
+    fetchWines
+} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function WineDetail (props) {
@@ -8,6 +12,9 @@ function WineDetail (props) {
     const [bottleTotals, setBottleTotals] = useState("")
     const [caseTotals, setCaseTotals] = useState("")
     
+
+    // get all wines
+    const getWines = props.fetchWines();
 
     // on click of add to cart button, add to cart
     const handleAddToCart = (d) =>{
@@ -52,17 +59,18 @@ function WineDetail (props) {
     }
 
     const query = new URLSearchParams(props.location.search)
-    const tag = query.get("tag").toString()
-    const filteredData = wines.filter(d => d.name.toLowerCase().toString() === tag)
+    const searchKeyWord = query.get("name").toString()
 
-    const wines = props.filteredData.map((d, i) =>
-        <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
+    const filteredData = props.wines.filter(d => d.name.toLowerCase().toString() === searchKeyWord)
+    
+    const wines = filteredData.map((d, i) =>
+        <div className="col-12 col-sm-6 col-md-6 col-lg-6 cardwrapper" key={i}>
             <div className="no-gutters row cardcontent">
-                    <div className="col-lg-5 wineImage">
-                        <img src={props.imageUrl + d.image} alt={d.name}/>
+                    <div className="col-3 col-sm-6 col-md-5 wineImage">
+                    <img src={props.imageUrl + d.image} alt={d.name} className="img-fluid"/>
                     </div>
                     
-                    <div className="col-lg-7">
+                    <div className="col-9 col-sm-6 col-md-7">
                     <div className="card-body content">
                         <h5 className="card-title row">
                             <b className="col-12">
@@ -72,8 +80,8 @@ function WineDetail (props) {
                             </b>
                         </h5>
                         <br/>
-                         <div className="card-text row">
-                            <div className="bottles col-12 col-md-6">
+                        <div className="card-text row">
+                            <div className="bottles col-6">
                                 <h6><b>Bottles</b></h6>
                                 <p>${d.cost.bottle}</p>
                                 <input 
@@ -83,7 +91,7 @@ function WineDetail (props) {
                                     onChange={() => handleBottleQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>
                             </div>
-                            <div className="case col-12 col-md-6">
+                            <div className="case col-6">
                                 <h6><b>Case</b></h6>
                                 <p>${d.cost.case}</p>
                                 <input 
@@ -95,24 +103,40 @@ function WineDetail (props) {
                             </div>
                         </div>
 
-                        <div className="cta row">
-                            <button className="addtocart col-12" onClick={ () => handleAddToCart(d)}>Add to cart</button>
+                        <div className="cta">
+                            <button className="addtocart" onClick={ () => handleAddToCart(d)}>Add to cart</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <hr/>
+            <div className="details row">
+                <div className="col-12">
+                   <h4>
+                        <b>
+                            Product Details
+                        </b>
+                    </h4>
+                    <p>
+                        {d.details.split("\\.")}
+                    </p> 
+                </div>
+                
             </div>
         </div>
             
         )
         
         return (
-            <div className="justify-content-center card details">
+            <div className="row justify-content-center details winewrapper card">
                 {wines}
+
             </div>
         )
 }
  
 const mapStateToProps = (state) =>({
+    wines : state.wineData.allWines,
     caseQuantity : state.calculations.singleProductCalculations.caseQuantity,
     caseTotals : state.calculations.singleProductCalculations.caseTotals,
     bottleTotals : state.calculations.singleProductCalculations.bottleTotals,
@@ -120,4 +144,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, { amountsCalculations,addToCart})(WineDetail)
+export default connect(mapStateToProps, { fetchWines, amountsCalculations,addToCart})(WineDetail)

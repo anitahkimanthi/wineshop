@@ -1,6 +1,6 @@
 import React, { useState,useSelector} from 'react';
 import { withRouter } from "react-router";
-import { fetchWines, amountsCalculations, addToCart, viewDetails} from "../redux/actions/actions";
+import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Wines (props) {
@@ -92,7 +92,7 @@ function Wines (props) {
                         </h5>
                         <br/>
                         <div className="card-text row">
-                            <div className="bottles col-12 col-md-6">
+                            <div className="bottles col-6">
                                 <h6><b>Bottles</b></h6>
                                 <p>${d.cost.bottle}</p>
                                 <input 
@@ -102,7 +102,7 @@ function Wines (props) {
                                     onChange={() => handleBottleQuantityInput(d)}
                                 /> <span className="quantity">QTY</span>
                             </div>
-                            <div className="case col-12 col-md-6">
+                            <div className="case col-6">
                                 <h6><b>Case</b></h6>
                                 <p>${d.cost.case}</p>
                                 <input 
@@ -149,4 +149,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default  connect(mapStateToProps, {fetchWines, viewDetails,amountsCalculations,addToCart}) (Wines)
+export default  connect(mapStateToProps, {fetchWines,amountsCalculations,addToCart}) (Wines)
