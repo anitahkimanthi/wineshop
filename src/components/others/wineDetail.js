@@ -83,7 +83,7 @@ function WineDetail (props) {
         <div className="col-12 col-sm-6 col-md-6 col-lg-6 cardwrapper" key={i}>
             <div className="no-gutters row cardcontent">
                     <div className="col-3 col-sm-6 col-md-5 wineImage">
-                    <img src={props.imageUrl + d.image} alt={d.name} className="img-fluid"/>
+                    <img src={imageUrl + d.image} alt={d.name} className="img-fluid"/>
                     </div>
                     
                     <div className="col-lg-7">
@@ -162,6 +162,7 @@ function WineDetail (props) {
  
 const mapStateToProps = (state) =>({
     wines : state.wineData.allWines,
+    imageUrl : state.wineData.imageUrl
     
 })
 
