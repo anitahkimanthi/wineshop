@@ -22,9 +22,10 @@ function Cart (props){
         setState({open : false});
     };
 
-    const checkoutAll = () =>{
+    const handleCheckoutAll = () =>{
         setState({
-            cartItem : cart
+            cartItem : cart,
+            open : true,
         })
     }
 
@@ -87,7 +88,7 @@ function Cart (props){
                                 <h3><b>$ {totalPrice}</b></h3>
                             </li>
                             <li className="list-unstyled checkoutall col-12 col-md-6">
-                                <button className="cta" onClick={checkoutAll}>Checkout all </button>
+                                <button className="cta" onClick={handleCheckoutAll}>Checkout all </button>
                             </li>
                             </ul>
                         </div>
@@ -97,7 +98,7 @@ function Cart (props){
                 null}
 
                 {open &&
-                <CheckoutInfo open={open} cartItem={cartItem} handleCheckout={handleCheckout} handleClose={handleClose}/>
+                <CheckoutInfo open={open} cartItem={cartItem} handleCheckout={handleCheckout} handleCheckoutAll={handleCheckoutAll} handleClose={handleClose}/>
                 }
         </div>
     )
