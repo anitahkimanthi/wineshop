@@ -141,6 +141,7 @@ function Orders (props) {
      
 const mapStateToProps = (state) =>({
     orders : state.orders.orders,
+    imageUrl : state.wineData.imageUrl
     
 })
 
