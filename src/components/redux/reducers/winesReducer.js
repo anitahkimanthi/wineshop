@@ -1,7 +1,8 @@
 import {
     FETCHWINES, 
     FETCH_ERROR, 
-    IMAGES_URL
+    IMAGES_URL,
+    ORDERS
 } from "../actions/types"
 
 const initialState = {

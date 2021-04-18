@@ -6,9 +6,8 @@ import {
     FETCHWINES,
     CHECKOUTREQUIREMENTS,
     FETCH_ERROR,
-    SINGLE_WINE_CALCULATION,
+    ORDERS,
     CALCULATEAllTOTALS,
-    VIEW_DETAILS
 } from "./types";
 
 // get all wines from the database
@@ -41,54 +40,58 @@ export const fetchWines = () => dispatch => {
 export const addToCart = (d, userData,) => dispatch => {
     // get the details of the wine clicked and add them to cart (name, price, quantity, and image)
    
-   const pushTocart = store.getState().cart.cartproducts
+    const pushTocart = store.getState().cart.cartproducts
+    const checkProduct = pushTocart.some(p => p.name === d.name)
 
-   const item = new Object()
-    item.id = d.no
-    item.image = d.image
-    item.name = d.name
-    item.quantity = userData.bottleQuantity
-    item.totals = userData.bottleTotals
-
+    if(!checkProduct){
+        const item = new Object()
+        item.id = d.no
+        item.image = d.image
+        item.name = d.name
+        item.price = d.cost.bottle
+        item.quantity = userData.bottleQuantity
+        item.totals = userData.bottleTotals
+        
     pushTocart.push(item)
     // push the product to the cartproducts array
     dispatch({
         type: ADDTOCART,
         payload: pushTocart,
     })
+    }
 }
 
 // calculate totals and quantity
 export const cartItemsCalculations = () => dispatch => {
     // get items added to cart and add the prices
-    const products = store.getState().cart.cartproducts.products.map((p, i) => p)
-
-    // calculate total prices
-        // code here
-
+    const priceValues = store.getState().cart.cartproducts.map((p, i) => p.totals)
+    
+     const sum = priceValues.reduce((a, b) => {return a + b})
+        
     dispatch({
         type: CALCULATEAllTOTALS,
-        payload: "",
-    })
-    
+        payload: sum,
+    }) 
 }
 
-// calculate totals of single product on quantity increase or decrease
-export const amountsCalculations = (bottleData, caseData) => dispatch => {
-    // combine the data objects using concat
+export const ordersAction = (cartItem) => dispatch =>{
+
+    const orderItems = store.getState().orders.orders
+
+    orderItems.push(cartItem)
 
     dispatch({
-        type: SINGLE_WINE_CALCULATION,
-        payload: {}
+        type : ORDERS,
+        payload: orderItems
     })
 }
 
 // user credentials before checkout
-export const checkoutRequiredInfo = (userInformation) => dispatch => {
+export const checkoutRequiredInfo = (userInfo) => dispatch => {
     // when user clicks checkout request them to enter their details
     dispatch({
         type: CHECKOUTREQUIREMENTS,
-        payload: [],
+        payload: userInfo,
     })
 }
 

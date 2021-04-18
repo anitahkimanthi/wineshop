@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
 import {Link, NavLink} from "react-router-dom"
-import {addToCart} from "../redux/actions/actions";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
-import store from '../redux/store';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import {connect} from "react-redux"
 
 function Header (props) {
@@ -24,10 +23,7 @@ function Header (props) {
         setOpen(!open)
         console.log(open)
     }
-
-    const goToCart = () =>{
-        props.history.push("/cart")
-    }
+    
     return(
         <div className="row justify-content-center header">
             <div className="col-12 col-md-10">
@@ -71,12 +67,20 @@ function Header (props) {
                     </ul>
                 </div>
                 <div className="col-12 col-md-8 text-right cartdiv">
-                    <span className="cart" onClick={goToCart}>
-                        <Badge badgeContent={count} color="secondary">
-                            <ShoppingCartIcon/> 
-                        </Badge>
-                        <label>Cart </label>
-                    </span>
+                    <Link to="/cart">
+                        <span className="cart">
+                            <Badge badgeContent={count} color="secondary">
+                                <ShoppingCartIcon/> 
+                            </Badge>
+                            <label>Cart</label>
+                        </span>
+                    </Link>
+                    <Link to="/orders">
+                        <span className="order">
+                            <ListAltIcon/> 
+                            <label>Orders </label>
+                        </span>
+                    </Link>
                 </div>
             </div>
             </div>

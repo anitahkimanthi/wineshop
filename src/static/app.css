@@ -35,6 +35,9 @@
     padding: 0;
     color: #929292
 }
+.cartdiv .cart{
+    margin-right: 20px;
+}
 .nopadding{
     padding: 0
 }
@@ -103,7 +106,12 @@
 }
 
 @media only screen and (min-width: 778px){
-    
+    .content .bottles{
+        border-right: 1px solid #cccccc;
+    }
+}
+.ordersCards .bottles{
+    border : none
 }
 .error{
     color: red
@@ -124,7 +132,6 @@
 }
 
 .content .bottles{
-    border-right: 1px solid #cccccc;
     padding: 0 10px;
 }
 .content .case{
@@ -135,6 +142,9 @@
     width: 80%;
     margin-right: 5px;
     color: #6e6e6e
+}
+.wrapper a{
+    color: #b45022
 }
 
 .content .addtocart{
@@ -174,6 +184,7 @@
 }
 .winewrapper .quantity, input{
     font-size: 12px;
+    margin-left: 10px
 }
 .winewrapper .card-title{
     color:#6e6e6e
@@ -182,7 +193,7 @@
     color: #6e6e6e;
 }
 
-hr{
+.header hr{
     margin-bottom: 0;
     margin-top:10px
 }
@@ -203,4 +214,109 @@ hr{
 }
 .details .cardwrapper{
     margin: 0 auto;
+}
+
+/* add to cart */
+.addtocartcard{
+    margin-bottom: 10px;
+}
+.altotal .price{
+    color: #b45022;
+    text-align: right;
+}
+.addtocartcard hr{
+    margin-bottom: 0;
+    margin-top:-2px
+}
+.addtocartcard .section{
+    border-right: 1px solid #ccc;
+}
+.calc{
+    padding: 10px !important
+}
+.product_total{
+    padding: 10px !important
+
+}
+.price_total{
+    text-align: right;
+}
+.price_total h4{
+    padding: 10px 0
+}
+.cart{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #6e6e6e
+}
+.card .price{
+    text-align: center;
+}
+.cart .checkout{
+    text-align: right;
+}
+.cart .empty{
+    text-align: right;
+}
+.cart p{
+    padding: 10%
+}
+.cart .bottles{
+    padding-top:5%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.cart button{
+    border: none;
+    padding: 5px 10px;
+}
+.cart .cta{
+    background-color: #b45022 !important;
+    color: #ffffff
+}
+.checkoutall .price{
+    color: #b45022
+}
+.addtocartcard .title{
+    margin-top:10px
+}
+.checkoutForm input{
+margin-top: 10px;
+padding: 4px 10px;
+}
+
+.checkoutForm button{
+    padding: 5px;
+    background-color: #b45022;
+    border: none;
+    color: #fff;
+    margin-top: 10px;
+}
+.checkoutForm hr{
+    margin: 7 !important;
+}
+.checkoutForm h6{
+    margin-bottom: 0 !important;
+}
+
+.checkoutForm .ordernote{
+    margin-top: 20px;
+}
+.checkoutForm .ordernote{
+background-color: #d1d1d1;
+}
+.alert{
+    margin-bottom: 10px;
+    margin-top:10px
+}
+
+/* delivery  */
+.deliverInfo {
+    background-color: #f1f1f1;
+    padding: 10px; 
+    margin: 15px 0
+}
+.delivery span{
+    color: #b45022
 }

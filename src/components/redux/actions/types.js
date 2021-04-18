@@ -6,6 +6,7 @@ export const IMAGES_URL = "IMAGES_URL"
 // filter wines
 export const FILTER_WINES = "FILTER_WINES"
 export const FILTER_ERROR = "FILTER_ERROR"
+export const ORDERS = "ORDERS"
 
 // view single product
 export const VIEW_DETAILS = "VIEW_DETAILS"

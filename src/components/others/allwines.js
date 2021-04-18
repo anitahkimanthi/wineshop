@@ -1,14 +1,14 @@
 import React, { useState,useSelector} from 'react';
 import { withRouter } from "react-router";
-import { fetchWines, amountsCalculations, addToCart} from "../redux/actions/actions";
+import { fetchWines, addToCart, cartItemsCalculations} from "../redux/actions/actions";
 import {connect} from "react-redux";
 
 function Wines (props) {
-    const [inputValues, setInputValues] = useState({
+    const [state, setState] = useState({
         bottleQuantity : "1",
         caseQuantity : "1",
-        bottleTotals : "",
-        caseTotals : ""
+        bottleTotals : 0,
+        caseTotals : 0
     })
     
     const fetchData = props.fetchWines();
@@ -21,55 +21,54 @@ function Wines (props) {
 
     // on click of add to cart button, add to cart
     const handleAddToCart = (d) =>{
-        
+
+        const {bottleQuantity,bottleTotals,caseQuantity,caseTotals} = state
+
         const userData = {
-            bottleQuantity : props.caseQuantity,
-            caseTotals : props.caseTotals,
-            caseQuantity : props.caseQuantity,
-            bottleTotals : props.bottleTotals,
+            bottleQuantity : bottleQuantity,
+            caseTotals : caseTotals === 0 ? d.cost.case : caseTotals,
+            caseQuantity : caseQuantity,
+            bottleTotals : bottleTotals === 0 ? d.cost.bottle : bottleTotals,
         }
 
         props.addToCart(d, userData)
+        props.cartItemsCalculations()
+
     }
 
     // handle user inputs and change state
-    const handleBottleQuantityInput = (d, e) =>{
+    const handleBottleQuantityInput = (e) =>{
         // set state on change of value
-        const {name, value} = e.target
-        console.log(name)
-        setInputValues({
-            ...inputValues,
-            [name] : value
-        })
+        const {value} = e.target
+
         // do the calculations as input change
-        // save the totals in redux state
-        const {bottleQuantity,bottleTotals,} = inputValues
+        const bottlePrice = e.currentTarget.id
+        const bottlePriceCalc = value * bottlePrice
 
-        const bottleData = {
-            bottleQuantity,
-            bottleTotals,
-        }
-
-        props.amountsCalculations(bottleData)
+        // setting values to state
+        setState({
+            ...state,
+            bottleQuantity : value,
+            bottleTotals : bottlePriceCalc
+        })
     }
 
     // handle user inputs and change state
-    const handleCaseQuantityInput = (d,e) =>{
+    const handleCaseQuantityInput = (e) =>{
         // set state on change of value
-        const {name, value} = e.target
+        const {value} = e.target
 
-        setInputValues({
-            ...inputValues,
-            [name] : value
-        })
         // do the calculations as input change
-        // save the totals in state state
-        const {caseQuantity,caseTotals} = inputValues
-        const caseData = {
-            caseQuantity,
-            caseTotals
-        }
-        props.amountsCalculations(caseData)
+        const casePrice = e.currentTarget.id
+        
+        const casePriceCalc = value * casePrice
+        
+        // setting the values to state
+        setState({
+            ... state,
+            caseQuantity : value,
+            caseTotals : casePriceCalc
+        })
     }
     
 
@@ -94,23 +93,37 @@ function Wines (props) {
                         <div className="card-text row">
                             <div className="bottles col-6">
                                 <h6><b>Bottles</b></h6>
-                                <p>${d.cost.bottle}</p>
+                                <p>
+                                    $ {state.bottleTotals === 0 ? 
+                                    d.cost.bottle
+                                    :
+                                    <span>{state.bottleTotals }</span>}
+                                </p>
                                 <input 
+                                    id={d.cost.case}
                                     type="number" 
                                     name="bottleQuantity"
-                                    value={inputValues.bottleQuantity} 
-                                    onChange={() => handleBottleQuantityInput(d)}
-                                /> <span className="quantity">QTY</span>
+                                    value={state.bottleQuantity} 
+                                    onChange={handleBottleQuantityInput}
+                                />
+                                <span className="quantity">QTY</span>
                             </div>
                             <div className="case col-6">
                                 <h6><b>Case</b></h6>
-                                <p>${d.cost.case}</p>
+                                <p>
+                                    $ {state.caseTotals === 0 ? 
+                                    d.cost.case
+                                    :
+                                    <span>{state.caseTotals }</span>}
+                                </p>
                                 <input 
+                                    id={d.cost.case}
                                     type="number" 
                                     name="caseQuantity"
-                                    value={inputValues.caseQuantity} 
-                                    onChange={() => handleCaseQuantityInput(d)}
-                                /> <span className="quantity">QTY</span>
+                                    value={state.caseQuantity} 
+                                    onChange={handleCaseQuantityInput}
+                                />
+                                <span className="quantity">QTY</span>
                             </div>
                         </div>
 
@@ -142,11 +155,7 @@ const mapStateToProps = (state) =>({
     wines: state.wineData.allWines,
     error : state.wineData.error,
     imageUrl : state.wineData.imageUrl,
-    caseQuantity : state.calculations.singleProductCalculations.caseQuantity,
-    caseTotals : state.calculations.singleProductCalculations.caseTotals,
-    bottleTotals : state.calculations.singleProductCalculations.bottleTotals,
-    bottleQuantity: state.calculations.singleProductCalculations.bottleQuantity,
     
 })
 
-export default   withRouter(connect(mapStateToProps, {fetchWines,amountsCalculations,addToCart}) (Wines))
+export default   withRouter(connect(mapStateToProps, {fetchWines,addToCart, cartItemsCalculations}) (Wines))

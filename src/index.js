@@ -7,6 +7,7 @@ import { createBrowserHistory } from "history";
 import Home from "./components/others/allwines";
 import WineDetail from "./components/others/wineDetail";
 import Cart from "./components/others/cart";
+import Orders from "./components/others/orders";
 import Filter from "./components/others/filtered";
 import store from "./components/redux/store";
 import Error from "./components/others/notfound";
@@ -29,6 +30,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/filter" component={Home}/>
+                    <Route path="/orders" component={Orders}/>
                     <Route path="/wines" component={WineDetail}/>
                     <Route path="/categories" component={Filter}/>
                     <Route path="/cart" component={Cart}/>
