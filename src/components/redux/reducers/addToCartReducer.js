@@ -1,6 +1,7 @@
 import {
     ADDTOCART,
-    EMPTY_CART
+    EMPTY_CART,
+    CARTITEMS
 } from "../actions/types"
 
 const initialState = {
@@ -17,6 +18,11 @@ const addToCartReducer = (state = initialState, action) =>{
         case EMPTY_CART:
             return{
                 ...state,
+            }
+        case CARTITEMS:
+            return{
+                ...state,
+                cartproducts : action.payload
             }
             default:
                 return state

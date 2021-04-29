@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CheckoutInfo from "./personalDetails"
 import {cartItemsCalculations} from "../redux/actions/actions"
+import store from "../redux/store"
+import {
+    CARTITEMS,
+} from "../redux/actions/types";
+
 
 function Cart (props){
     const [state, setState] = useState({
         open : false,
         cartItem : null,
     })
-    const {totalPrice, cart,cartItemsCalculations} = props
+    const {totalPrice, cart, cartItemsCalculations} = props
 
     const handleCheckout = (c) => {
         setState({
             open : true,
             cartItem : c 
         });
-
     };
-
+    
     const handleClose = () => {
         setState({open : false});
     };
@@ -29,6 +33,7 @@ function Cart (props){
         })
     }
 
+    console.log(cart, store)
     const {open,cartItem} = state
 
     const cartData = cart.map((c, i) => 

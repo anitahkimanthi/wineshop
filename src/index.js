@@ -1,5 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Provider } from "react-redux";
+import {
+    CARTITEMS,
+    ORDERS
+} from "./components/redux/actions/types";
 import ReactDOM from "react-dom";
 import Header from "./components/others/header";
 import { Router, Switch, Route } from "react-router-dom";
@@ -18,6 +22,22 @@ import "./static/app.css"
 const history = createBrowserHistory();
 
 const App = () => {
+
+    useEffect(() => {
+        const getLocalData = JSON.parse(localStorage.getItem("cartproducts"))
+        const getOrderItems = JSON.parse(localStorage.getItem("orderItems"))
+
+        store.dispatch({
+            type: CARTITEMS,
+            payload: getLocalData === null ? [] : getLocalData,
+        })
+
+        store.dispatch({
+            type: ORDERS,
+            payload: getOrderItems === null ? [] : getOrderItems,
+        })
+    });
+
     return (
         <div className="row justify-content-center App">
             <Router  history={history}>
@@ -31,6 +51,7 @@ const App = () => {
                     <Route exact path="/" component={Home}/>
                     <Route path="/filter" component={Home}/>
                     <Route path="/orders" component={Orders}/>
+                    <Route path="/orderby" component={Home}/>
                     <Route path="/wines" component={WineDetail}/>
                     <Route path="/categories" component={Filter}/>
                     <Route path="/cart" component={Cart}/>
@@ -49,3 +70,4 @@ ReactDOM.render(
   
   document.getElementById("root")
 )
+

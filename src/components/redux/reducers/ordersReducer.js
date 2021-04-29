@@ -1,5 +1,6 @@
 import {
-    ORDERS
+    ORDERS,
+    ORDERITEMS
 } from "../actions/types"
 
 const initialState = {
@@ -12,6 +13,11 @@ const fetchWines = (state = initialState, action) =>{
     switch(action.type){
        
         case ORDERS:
+        return{
+            ...state,
+            orders : action.payload
+        }
+        case ORDERITEMS:
         return{
             ...state,
             orders : action.payload

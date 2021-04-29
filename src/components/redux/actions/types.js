@@ -7,6 +7,7 @@ export const IMAGES_URL = "IMAGES_URL"
 export const FILTER_WINES = "FILTER_WINES"
 export const FILTER_ERROR = "FILTER_ERROR"
 export const ORDERS = "ORDERS"
+export const ORDERITEMS ="ORDERITEMS"
 
 // view single product
 export const VIEW_DETAILS = "VIEW_DETAILS"
@@ -14,6 +15,7 @@ export const VIEW_DETAILS = "VIEW_DETAILS"
 // add to cart
 export const ADDTOCART = "ADDTOCART"
 export const EMPTY_CART ="EMPTY_CART"
+export const CARTITEMS = "CARTITEMS"
 
 // calculate the totals
 export const CALCULATEAllTOTALS = "CALCULATEAllTOTALS"

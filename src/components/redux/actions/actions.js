@@ -17,6 +17,7 @@ export const fetchWines = () => dispatch => {
         type: FETCHWINES,
         payload: data,
     })
+
     // const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
 
     // axios.get(url)
@@ -53,6 +54,8 @@ export const addToCart = (d, userData,) => dispatch => {
         item.totals = userData.bottleTotals
         
     pushTocart.push(item)
+
+    localStorage.setItem("cartproducts", JSON.stringify(pushTocart))
     // push the product to the cartproducts array
     dispatch({
         type: ADDTOCART,
@@ -79,6 +82,8 @@ export const ordersAction = (cartItem) => dispatch =>{
     const orderItems = store.getState().orders.orders
 
     orderItems.push(cartItem)
+
+    localStorage.setItem("orderItems", JSON.stringify(orderItems))
 
     dispatch({
         type : ORDERS,
