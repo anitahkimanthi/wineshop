@@ -15,14 +15,6 @@ function WineDetail (props) {
     
     const {imageUrl, wines} = props
 
-    const fetchData = props.fetchWines();
-
-    // redirect to the detail page
-    const ShowDetails = (d) =>{
-        props.history.push( `/wines/?name=${d.name.toLowerCase()}`)
-        
-    }
-
     // on click of add to cart button, add to cart
     const handleAddToCart = (d) =>{
 
@@ -132,7 +124,9 @@ function WineDetail (props) {
                             <span className="quantity">QTY</span>
                         </div>
                     </div>
-
+                    <div className="cta">
+                        <button className="addtocart" onClick={() => handleAddToCart(d)}>Add to cart</button>
+                    </div>
                     </div>
                 </div>
             </div>

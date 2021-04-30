@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect } from "react-redux";
 import CheckoutInfo from "./personalDetails"
 import store from "../redux/store"
 import {cartItemsCalculations} from "../redux/actions/actions"
 import {
-    CARTITEMS,
-    CALCULATEAllTOTALS
+    CARTITEMS
 } from "../redux/actions/types";
 
 

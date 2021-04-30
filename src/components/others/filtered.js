@@ -15,8 +15,6 @@ function Filter(props) {
 
     const { imageUrl, wines, error } = props
 
-    const fetchData = props.fetchWines();
-
     // redirect to the detail page
     const ShowDetails = (d) => {
         props.history.push(`/wines/?name=${d.name.toLowerCase()}`)
@@ -64,7 +62,7 @@ function Filter(props) {
     // handle user inputs and change state
     const handleCaseQuantityInput = (e) => {
         // set state on change of value
-        const { value, id } = e.target
+        const { value } = e.target
 
         // do the calculations as input change
         const casePrice = e.currentTarget.id
@@ -100,7 +98,6 @@ function Filter(props) {
         const searchKeyWord = query.get("tag").toString()
 
         const filteredData = wines.filter(w => w.tags.some(t => t.toLowerCase() === searchKeyWord))
-        console.log(filteredData)
 
         if (filteredData.length !== 0) {
             const products = filteredData.map((d, i) =>

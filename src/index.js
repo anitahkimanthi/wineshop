@@ -3,7 +3,8 @@ import { Provider } from "react-redux";
 import {
     CARTITEMS,
     ORDERS,
-    CALCULATEAllTOTALS
+    CALCULATEAllTOTALS,
+    FETCHWINES
 } from "./components/redux/actions/types";
 import ReactDOM from "react-dom";
 import Header from "./components/others/header";
@@ -18,19 +19,29 @@ import Filter from "./components/others/filtered";
 import store from "./components/redux/store";
 import Error from "./components/others/notfound";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.min.js"
+import "bootstrap/dist/js/bootstrap.min.js"
+import "popper.js";
+
 import "./static/app.css"
 
 const history = createBrowserHistory();
 
 const App = () => {
     useEffect(() => {
+
         const getLocalData = JSON.parse(localStorage.getItem("cartproducts"))
         const getOrderItems = JSON.parse(localStorage.getItem("orderItems"))
+
+        const getWines = JSON.parse(localStorage.getItem("wines"))
 
         store.dispatch({
             type: CARTITEMS,
             payload: getLocalData === null ? [] : getLocalData,
+        })
+
+        store.dispatch({
+            type: FETCHWINES,
+            payload: getWines
         })
 
         store.dispatch({
@@ -46,9 +57,6 @@ const App = () => {
         if(cart.length > 1){
 
             const sum = priceValues.reduce((a, b) => {return a + b})
-
-            console.log(sum)
-
             store.dispatch({
                 type: CALCULATEAllTOTALS,
                 payload: sum,
@@ -59,7 +67,6 @@ const App = () => {
                 payload: priceValues,
             }) 
         }
-        console.log(priceValues)
     }, []);
 
     return (

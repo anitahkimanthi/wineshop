@@ -13,28 +13,12 @@ function Orders (props) {
         caseTotals : 0
     })
     
-    const {imageUrl, error, orders} = props
-
-    console.log(orders)
+    const {imageUrl, orders} = props
 
     // redirect to the detail page
     const ShowDetails = (d) =>{
         props.history.push( `/wines/?name=${d.name.toLowerCase()}`)
         
-    }
-
-    // on click of add to cart button, add to cart
-    const handleAddToCart = (d) =>{
-        const {bottleQuantity,bottleTotals,caseQuantity,caseTotals} = state
-
-        const userData = {
-            bottleQuantity : bottleQuantity,
-            caseTotals : caseTotals === 0 ? d.cost.case : caseTotals,
-            caseQuantity : caseQuantity,
-            bottleTotals : bottleTotals === 0 ? d.cost.bottle : bottleTotals,
-        }
-
-        props.addToCart(d, userData)
     }
 
     // handle user inputs and change state
@@ -51,24 +35,6 @@ function Orders (props) {
             ...state,
             bottleQuantity : value,
             bottleTotals : bottlePriceCalc
-        })
-    }
-
-    // handle user inputs and change state
-    const handleCaseQuantityInput = (e) =>{
-        // set state on change of value
-        const {value} = e.target
-
-        // do the calculations as input change
-        const casePrice = e.currentTarget.id
-        
-        const casePriceCalc = value * casePrice
-        
-        // setting the values to state
-        setState({
-            ...state,
-            caseQuantity : value,
-            caseTotals : casePriceCalc
         })
     }
     

@@ -5,7 +5,6 @@ import {
     ADDTOCART,
     FETCHWINES,
     CHECKOUTREQUIREMENTS,
-    FETCH_ERROR,
     ORDERS,
     CALCULATEAllTOTALS,
 } from "./types";
@@ -13,27 +12,25 @@ import {
 // get all wines from the database
 export const fetchWines = () => dispatch => {
 
-    dispatch({
-        type: FETCHWINES,
-        payload: data,
+    const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
+
+    axios.get(url)
+    .then( response =>{
+        const responseData = response.data
+        dispatch({
+            type: FETCHWINES,
+            payload: responseData,
+        })
+        localStorage.setItem("wines", JSON.stringify(responseData))
+
     })
-
-    // const url = "https://storage.googleapis.com/wineshop-assets/wine-shop.json"
-
-    // axios.get(url)
-    // .then( response =>{
-    //     const data = response.data
-    //     dispatch({
-    //         type: FETCHWINES,
-    //         payload: data,
-    //     })
-    // })
-    // .catch(error =>{
-    //     dispatch({
-    //         type: FETCH_ERROR,
-    //         payload: "Network error!",
-    //     })
-    // })
+    .catch(error =>{
+        dispatch({
+            type: FETCHWINES,
+            payload: data,
+        })
+        localStorage.setItem("wines", JSON.stringify(data))
+    })
 }
 
 
@@ -45,7 +42,7 @@ export const addToCart = (d, userData,) => dispatch => {
     const checkProduct = pushTocart.some(p => p.name === d.name)
 
     if(!checkProduct){
-        const item = new Object()
+        const item = {}
         item.id = d.no
         item.image = d.image
         item.name = d.name
@@ -75,13 +72,11 @@ export const cartItemsCalculations = () => dispatch => {
     
     if(cart.length > 1){
         const sum = priceValues.reduce((a, b) => {return a + b})
-        console.log(sum)
         store.dispatch({
             type: CALCULATEAllTOTALS,
             payload: sum,
         }) 
     }else{
-        console.log(priceValues)
         store.dispatch({
             type: CALCULATEAllTOTALS,
             payload: priceValues,

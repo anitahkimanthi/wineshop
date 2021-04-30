@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router";
 import { fetchWines, addToCart, cartItemsCalculations } from "../redux/actions/actions";
 import { connect } from "react-redux";
@@ -13,10 +13,11 @@ function Wines(props) {
         title: ""
     })
 
-    const { imageUrl, wines, error } = props
+    const { imageUrl, wines, error, fetchWines} = props
 
-    const fetchData = props.fetchWines();
-
+    useEffect(() => {
+        fetchWines();
+    })
     // redirect to the detail page
     const ShowDetails = (d) => {
         props.history.push(`/wines/?name=${d.name.toLowerCase()}`)
@@ -64,7 +65,7 @@ function Wines(props) {
     // handle user inputs and change state
     const handleCaseQuantityInput = (e) => {
         // set state on change of value
-        const { value, id } = e.target
+        const { value } = e.target
 
         // do the calculations as input change
         const casePrice = e.currentTarget.id

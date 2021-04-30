@@ -48,13 +48,11 @@ function PersonalDetails(props) {
   })
 
   const handleInput = (e) =>{
-    console.log("typing")
-      // const {name, value} = e.target
-      // setstate({
-      //     ...state,
-      //     [name] : value
-      // })
-      // console.log(value)
+      const {name, value} = e.target
+      setstate({
+          ...state,
+          [name] : value
+      })
   }
 
   const handleSubmit = e =>{
