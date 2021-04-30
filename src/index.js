@@ -46,7 +46,7 @@ const App = () => {
                 <Header/>
             </div>
             
-            <div className="col-12 col-lg-11 col-xl-9 wrapper">
+            <div className="col-12 col-lg-11 col-xl-10 wrapper">
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/filter" component={Home}/>

@@ -80,7 +80,6 @@ function PersonalDetails(props) {
         setstate({
             ...state,
             showSuccess: false,
-
         })
         props.history.push("/orders")
     }

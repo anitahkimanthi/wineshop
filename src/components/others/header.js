@@ -30,24 +30,24 @@ function Header (props) {
     }
     
     const openAllCategories = () => {
-        setOpenCategories(true)
+        setOpenCategories(!openCategories)
         setOpenOrderBY(null)
     };
 
     const openOrderByPopup = () => {
-        setOpenOrderBY(true)
+        setOpenOrderBY(!openOrderBY)
         setOpenCategories(null)
     };
     
     const handleClose = () => {
-        setOpenOrderBY(!openOrderBY)
-        setOpenCategories(!openCategories)
+        setOpenOrderBY(null)
+        setOpenCategories(null)
     };
     
     
     return(
-        <div className="row justify-content-center header" onClose={handleClose} >
-            <div className="col-12 col-md-10">
+        <div className="row justify-content-center header" >
+            <div className="col-12 col-xl-10">
                 <div className="row">
                     <div className="col-12 text-center topheader">
                         <Link to="/">
@@ -59,19 +59,17 @@ function Header (props) {
             </div>
             <hr className="col-12"/>
 
-            <div className="col-12 col-md-9 productHeader">
+            <div className="col-12 col-xl-10 productHeader">
                 <Toolbar className="productHeader">
                     <List className="filter">
+                        <div className="navItem1">
                         <NavLink to="/filter" activeClassName="active" onClick={openAllCategories}>
                             All Catergories {openCategories ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                         </NavLink>
-                        <NavLink to="/orderby" activeClassName="active" onClick={openOrderByPopup}> 
-                            Order by {openOrderBY ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
-                        </NavLink>
-
-                        {openCategories &&
-                        <div
-                            className="popupmodal"
+                        <Popover
+                            open ={openCategories}
+                            onClose={handleClose}
+                            className="popupmodal1"
                         >
                             <Box p={2} className="morecontent">
                             <div className="row">
@@ -90,12 +88,17 @@ function Header (props) {
                                 </List>
                             </div>
                             </Box>
+                        </Popover>
                         </div>
-                        }
-
-                        {openOrderBY &&
-                        <div
-                            className="popup popupmodal"
+                        
+                        <div className="navItem2">
+                        <NavLink to="/orderby" activeClassName="active" onClick={openOrderByPopup}> 
+                            Order by {openOrderBY ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
+                        </NavLink>
+                        <Popover
+                            open ={openOrderBY}
+                            onClose={handleClose}
+                            className="popupmodal2"
                         >
                             <Box p={2} className="morecontent">
                             <div className="row">
@@ -110,8 +113,9 @@ function Header (props) {
                                 </List>
                             </div>
                             </Box>
+                        </Popover>
                         </div>
-                        }
+                        
                     </List>
 
                     <List className="cartdiv">

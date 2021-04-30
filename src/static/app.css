@@ -15,22 +15,62 @@
 .morecontent .modalItems{
     cursor: pointer;
 }
-.popupmodal{
-    top: 5% !important;
+.navItem1{
+ position: relative;
+}
+.navItem2{
+    position: relative;
+}
+@media only screen and (min-width: 567px) and (max-width:992px){ 
+    .popupmodal1{
+        left: 4% !important;
+    }
+    .popupmodal2{
+        left: 50% !important;
+    }
+}
+
+@media only screen and (min-width: 996px) and (max-width:1200){ 
+    .popupmodal1{
+        left: 10% !important;
+    }
+    .popupmodal2{
+        left: 30% !important;
+    }
+}
+
+@media only screen and (min-width: 1200px){ 
+    .popupmodal1{
+        left: 10% !important;
+    }
+    .popupmodal2{
+        left: 18% !important;
+    }
+}
+.popupmodal1{
     z-index: 1;
     opacity: 1;
-    margin-top: 4%;
-    background-color: #ffffff;
+    position: absolute;
+    top: 27% !important;
     transform: none;
     transition: opacity 279ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 186ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     position: absolute;
-    transform-origin: 30px 718px 0px !important;
-    box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+    transform-origin: 40% 0% !important;
 }
-.popup{
-    top: 138px;
-    left: 177px;
+.popupmodal2{
+    z-index: 1;
+    opacity: 1;
+    position: absolute;
+    top: 27% !important;
+    transform: none;
+    transition: opacity 279ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 186ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    position: absolute;
+    transform-origin: 40% 0% !important;
 }
+.filter{
+    position: relative;
+}
+
 .morecontent .modalItems span:hover{
     color: #b45022
 }

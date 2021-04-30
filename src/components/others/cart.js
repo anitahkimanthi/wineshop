@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CheckoutInfo from "./personalDetails"
-import {cartItemsCalculations} from "../redux/actions/actions"
 import store from "../redux/store"
 import {
     CARTITEMS,
+    CALCULATEAllTOTALS
 } from "../redux/actions/types";
 
 
@@ -13,7 +13,7 @@ function Cart (props){
         open : false,
         cartItem : null,
     })
-    const {totalPrice, cart, cartItemsCalculations} = props
+    const {totalPrice, cart, prices} = props
 
     const handleCheckout = (c) => {
         setState({
@@ -21,10 +21,42 @@ function Cart (props){
             cartItem : c 
         });
     };
+    useEffect(() =>{
+
+        if(cart.length > 1){
+            const sum = prices.reduce((a, b) => {return a + b})
+            store.dispatch({
+                type: CALCULATEAllTOTALS,
+                payload: sum,
+            }) 
+        }else{
+            store.dispatch({
+                type: CALCULATEAllTOTALS,
+                payload: prices,
+            }) 
+        }
+       
+    
+       
+    })
     
     const handleClose = () => {
         setState({open : false});
     };
+
+    const emptyCart = (index) =>{
+        const getLocalData = JSON.parse(localStorage.getItem("cartproducts"))
+
+        const newCart = getLocalData.filter((d, i) => d.name !== index)
+
+        localStorage.setItem("cartproducts", JSON.stringify(newCart))
+        
+        store.dispatch({
+            type: CARTITEMS,
+            payload: newCart === null ? cart: newCart,
+        })
+
+    }
 
     const handleCheckoutAll = () =>{
         setState({
@@ -33,11 +65,10 @@ function Cart (props){
         })
     }
 
-    console.log(cart, store)
     const {open,cartItem} = state
 
-    const cartData = cart.map((c, i) => 
-        <div className="addtocartcard card col-12" key={i} >
+    const cartData = cart.map((c, index) => 
+        <div className="addtocartcard card col-12" key={index} >
             <div className="row">
                 <div className="col-12 col-md-4 section">
                     <p>Delivery Info</p>
@@ -59,7 +90,7 @@ function Cart (props){
                             <small>{c.quantity} * {c.price}</small>
                         </li>
                         <li className="list-unstyled empty col-6 ">
-                            <button>Empty cart</button>
+                        <button onClick={() => emptyCart(c.name)}>Empty cart</button>
                         </li>
                     </ul>
                     <hr/>
@@ -111,7 +142,8 @@ function Cart (props){
 
 const mapStateToProps = (state) =>({
     cart : state.cart.cartproducts,
+    prices : state.cart.cartproducts.map(p => p.totals),
     totalPrice : state.calculations.priceTotals
 })
 
-export default connect(mapStateToProps, {cartItemsCalculations})(Cart)
+export default connect(mapStateToProps)(Cart)

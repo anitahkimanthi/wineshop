@@ -66,15 +66,25 @@ export const addToCart = (d, userData,) => dispatch => {
 
 // calculate totals and quantity
 export const cartItemsCalculations = () => dispatch => {
+
+    const cart = store.getState().cart.cartproducts
+
     // get items added to cart and add the prices
     const priceValues = store.getState().cart.cartproducts.map((p, i) => p.totals)
     
-     const sum = priceValues.reduce((a, b) => {return a + b})
+    if(cart.length > 1){
+        const sum = priceValues.reduce((a, b) => {return a + b})
         
-    dispatch({
-        type: CALCULATEAllTOTALS,
-        payload: sum,
-    }) 
+        store.dispatch({
+            type: CALCULATEAllTOTALS,
+            payload: sum,
+        }) 
+    }else{
+        store.dispatch({
+            type: CALCULATEAllTOTALS,
+            payload: priceValues,
+        }) 
+    }
 }
 
 export const ordersAction = (cartItem) => dispatch =>{
