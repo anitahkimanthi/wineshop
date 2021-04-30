@@ -103,16 +103,16 @@ function Filter(props) {
             const products = filteredData.map((d, i) =>
                 <div className="col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper" key={i}>
                     <div className="no-gutters row cardcontent">
-                        <div className="col-lg-5 wineImage">
+                        <div className="col-3 col-sm-4 col-lg-5 wineImage">
                             <img src={imageUrl + d.image} alt={d.name} className="img-fluid" />
                         </div>
 
-                        <div className="col-lg-7">
+                        <div className="col-9 col-sm-8 col-lg-7">
                             <div className="card-body content">
                                 <h5 className="card-title row">
                                     <b className="col-12">
                                         <span className="number">{d.no}</span>
-                                        <br />
+                                        col-9 col-sm-4 col-9 col-sm-4<br />
                                         <span className="name">{d.name}</span>
                                     </b>
                                 </h5>
@@ -131,7 +131,7 @@ function Filter(props) {
                                             </p>
                                             :
                                             <p>
-                                                {d.cost.bottle.toFixed(2)}
+                                                $ {d.cost.bottle.toFixed(2)}
                                             </p>
                                         }
 

@@ -72,11 +72,11 @@ function WineDetail (props) {
     const item = filteredData.map((d, i) =>
         <div className="col-12 col-sm-6 col-md-6 col-lg-6 cardwrapper" key={i}>
             <div className="no-gutters row cardcontent">
-                    <div className="col-3 col-sm-6 col-md-5 wineImage">
+                    <div className="col-3 col-sm-4 col-md-5 wineImage">
                     <img src={imageUrl + d.image} alt={d.name} className="img-fluid"/>
                     </div>
                     
-                    <div className="col-lg-7">
+                    <div className="col-9 col-sm-8 col-lg-7">
                 <div className="card-body content">
                     <h5 className="card-title row">
                         <b className="col-12">
@@ -112,7 +112,7 @@ function WineDetail (props) {
                                     <span>{d.cost.case.toFixed()}</span>
                                 :
                                 <span>
-                                    {state.caseTotals.toFixed() }</span>}
+                                   $ {state.caseTotals.toFixed() }</span>}
                             </p>
                             <input 
                                 id={d.cost.case}

@@ -42,11 +42,11 @@ function Orders (props) {
         const items = orders.map((d, i) =><div className="row winewrapper allwines">
         <div className="col-12 col-sm-6 col-md-6 col-lg-5 cardwrapper ordersCards" key={i}>
             <div className="no-gutters row cardcontent">
-                <div className="col-lg-5 wineImage">
+                <div className="col-3 col-sm-4 col-lg-5 wineImage">
                     <img src={imageUrl + d.image} alt={d.name} className="img-fluid"/>
                 </div>
                 
-                <div className="col-lg-7">
+                <div className="col-9 col-sm-8 col-lg-7">
                 <div className="card-body content">
                     <h5 className="card-title row">
                         <b className="col-12">
