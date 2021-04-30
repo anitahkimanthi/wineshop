@@ -66,7 +66,7 @@ function Orders (props) {
         
         // setting the values to state
         setState({
-            ... state,
+            ...state,
             caseQuantity : value,
             caseTotals : casePriceCalc
         })
@@ -97,7 +97,7 @@ function Orders (props) {
                                 Price : $ {d.price}
                             </p>
                             <input 
-                                id={d.quantity}
+                                id={d.bottleQuantity}
                                 type="number" 
                                 disabled
                                 name="bottleQuantity"

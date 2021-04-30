@@ -17,11 +17,14 @@ import {connect} from "react-redux"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Header (props) {
-    const [openCategories, setOpenCategories] = useState(null)
-    const [openOrderBY, setOpenOrderBY] = useState(null)
+    const [openCategories, setOpenCategories] = useState(false)
+    const [openOrderBY, setOpenOrderBY] = useState(false)
 
     const {count,addToCart} = props
 
+    const goHome = () =>{
+        props.history.push("/")
+    }
     const wineCategory = (e) =>{
         // e.currentTarget.id
         const id = e.currentTarget.id.toString()
@@ -31,17 +34,17 @@ function Header (props) {
     
     const openAllCategories = () => {
         setOpenCategories(!openCategories)
-        setOpenOrderBY(null)
+        setOpenOrderBY(false)
     };
 
     const openOrderByPopup = () => {
         setOpenOrderBY(!openOrderBY)
-        setOpenCategories(null)
+        setOpenCategories(false)
     };
     
     const handleClose = () => {
-        setOpenOrderBY(null)
-        setOpenCategories(null)
+        setOpenOrderBY(false)
+        setOpenCategories(false)
     };
     
     
@@ -74,6 +77,10 @@ function Header (props) {
                             <Box p={2} className="morecontent">
                             <div className="row">
                                 <List className="category list-unstyled col-12">
+                                    <ListItem>
+                                        <ListItemText id="red" className="modalItems" primary="All" onClick={goHome}/>
+                                    </ListItem>
+
                                     <ListItem>
                                         <ListItemText id="red" className="modalItems" primary="Red" onClick={wineCategory}/>
                                     </ListItem>

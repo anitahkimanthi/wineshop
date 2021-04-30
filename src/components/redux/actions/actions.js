@@ -50,7 +50,8 @@ export const addToCart = (d, userData,) => dispatch => {
         item.image = d.image
         item.name = d.name
         item.price = d.cost.bottle
-        item.quantity = userData.bottleQuantity
+        item.bottleQuantity = userData.bottleQuantity
+        item.caseQuantity = userData.caseQuantity
         item.totals = userData.bottleTotals
         
     pushTocart.push(item)
@@ -70,21 +71,23 @@ export const cartItemsCalculations = () => dispatch => {
     const cart = store.getState().cart.cartproducts
 
     // get items added to cart and add the prices
-    const priceValues = store.getState().cart.cartproducts.map((p, i) => p.totals)
+    const priceValues = cart.map((p, i) => Number(p.totals))
     
     if(cart.length > 1){
         const sum = priceValues.reduce((a, b) => {return a + b})
-        
+        console.log(sum)
         store.dispatch({
             type: CALCULATEAllTOTALS,
             payload: sum,
         }) 
     }else{
+        console.log(priceValues)
         store.dispatch({
             type: CALCULATEAllTOTALS,
             payload: priceValues,
         }) 
     }
+    
 }
 
 export const ordersAction = (cartItem) => dispatch =>{

@@ -2,10 +2,12 @@ import React, {useEffect} from "react";
 import { Provider } from "react-redux";
 import {
     CARTITEMS,
-    ORDERS
+    ORDERS,
+    CALCULATEAllTOTALS
 } from "./components/redux/actions/types";
 import ReactDOM from "react-dom";
 import Header from "./components/others/header";
+import Footer from "./components/others/footer";
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Home from "./components/others/allwines";
@@ -22,7 +24,6 @@ import "./static/app.css"
 const history = createBrowserHistory();
 
 const App = () => {
-
     useEffect(() => {
         const getLocalData = JSON.parse(localStorage.getItem("cartproducts"))
         const getOrderItems = JSON.parse(localStorage.getItem("orderItems"))
@@ -36,7 +37,30 @@ const App = () => {
             type: ORDERS,
             payload: getOrderItems === null ? [] : getOrderItems,
         })
-    });
+
+        const cart = store.getState().cart.cartproducts
+
+        // get items added to cart and add the prices
+        const priceValues = store.getState().cart.cartproducts.map((p, i) => Number(p.totals))
+        
+        if(cart.length > 1){
+
+            const sum = priceValues.reduce((a, b) => {return a + b})
+
+            console.log(sum)
+
+            store.dispatch({
+                type: CALCULATEAllTOTALS,
+                payload: sum,
+            }) 
+        }else{
+            store.dispatch({
+                type: CALCULATEAllTOTALS,
+                payload: priceValues,
+            }) 
+        }
+        console.log(priceValues)
+    }, []);
 
     return (
         <div className="row justify-content-center App">
@@ -59,6 +83,7 @@ const App = () => {
                 </Switch>
             </div>
             </Router>
+            <Footer/>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-    amountsCalculations, 
     addToCart,
     fetchWines
 } from "../redux/actions/actions";
@@ -8,8 +7,8 @@ import {connect} from "react-redux";
 
 function WineDetail (props) {
     const [state, setState] = useState({
-        bottleQuantity : "1",
-        caseQuantity : "1",
+        bottleQuantity : 1,
+        caseQuantity : 1,
         bottleTotals : 0,
         caseTotals : 0
     })
@@ -68,12 +67,11 @@ function WineDetail (props) {
         
         // setting the values to state
         setState({
-            ... state,
+            ...state,
             caseQuantity : value,
             caseTotals : casePriceCalc
         })
     }
-
     const query = new URLSearchParams(props.location.search)
     const searchKeyWord = query.get("name").toString()
 
@@ -100,10 +98,11 @@ function WineDetail (props) {
                         <div className="bottles col-6">
                             <h6><b>Bottles</b></h6>
                             <p>
-                                $ {state.bottleTotals === 0 ? 
-                                d.cost.bottle
-                                :
-                                <span>{state.bottleTotals }</span>}
+                                {state.bottleQuantity === 1 ? <span>$ {d.cost.bottle.toFixed(2)}</span>
+                                    :
+                                    <span>$ {state.bottleTotals.toFixed(2)}</span>
+                                }
+
                             </p>
                             <input 
                                 id={d.cost.case}
@@ -117,10 +116,11 @@ function WineDetail (props) {
                         <div className="case col-6">
                             <h6><b>Case</b></h6>
                             <p>
-                                $ {state.caseTotals === 0 ? 
-                                d.cost.case
+                                $ {state.caseQuantity === 1 ? 
+                                    <span>{d.cost.case.toFixed()}</span>
                                 :
-                                <span>{state.caseTotals }</span>}
+                                <span>
+                                    {state.caseTotals.toFixed() }</span>}
                             </p>
                             <input 
                                 id={d.cost.case}
@@ -150,7 +150,6 @@ function WineDetail (props) {
                 </div>
             </div>
         </div>
-            
         )
         
         return (

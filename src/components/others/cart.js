@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CheckoutInfo from "./personalDetails"
 import store from "../redux/store"
+import {cartItemsCalculations} from "../redux/actions/actions"
 import {
     CARTITEMS,
     CALCULATEAllTOTALS
@@ -13,7 +14,7 @@ function Cart (props){
         open : false,
         cartItem : null,
     })
-    const {totalPrice, cart, prices} = props
+    const {totalPrice, cart,cartItemsCalculations} = props
 
     const handleCheckout = (c) => {
         setState({
@@ -21,24 +22,7 @@ function Cart (props){
             cartItem : c 
         });
     };
-    useEffect(() =>{
-
-        if(cart.length > 1){
-            const sum = prices.reduce((a, b) => {return a + b})
-            store.dispatch({
-                type: CALCULATEAllTOTALS,
-                payload: sum,
-            }) 
-        }else{
-            store.dispatch({
-                type: CALCULATEAllTOTALS,
-                payload: prices,
-            }) 
-        }
-       
     
-       
-    })
     
     const handleClose = () => {
         setState({open : false});
@@ -56,6 +40,7 @@ function Cart (props){
             payload: newCart === null ? cart: newCart,
         })
 
+        cartItemsCalculations();
     }
 
     const handleCheckoutAll = () =>{
@@ -75,7 +60,7 @@ function Cart (props){
                 </div>
                 <div className="col-12 col-md-3 section">
                     <div className="bottles">
-                       {c.quantity}
+                       {c.bottleQuantity}
                         <h6>Bottles</h6> 
                     </div>
                 </div>
@@ -87,7 +72,7 @@ function Cart (props){
                                 {c.id} {c.name}
                                 </b>
                             </h6>
-                            <small>{c.quantity} * {c.price}</small>
+                            <small>{c.bottleQuantity} * {c.price}</small>
                         </li>
                         <li className="list-unstyled empty col-6 ">
                         <button onClick={() => emptyCart(c.name)}>Empty cart</button>
@@ -142,8 +127,7 @@ function Cart (props){
 
 const mapStateToProps = (state) =>({
     cart : state.cart.cartproducts,
-    prices : state.cart.cartproducts.map(p => p.totals),
     totalPrice : state.calculations.priceTotals
 })
 
-export default connect(mapStateToProps)(Cart)
+export default connect(mapStateToProps,{cartItemsCalculations})(Cart)

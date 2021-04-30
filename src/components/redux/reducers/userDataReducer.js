@@ -11,6 +11,7 @@ const UserInfoReducer = (state = initialState, action) =>{
     switch(action.type){
         case CHECKOUTREQUIREMENTS:
             return{
+                ...state,
                 userInfo : action.payload
             }
             default:

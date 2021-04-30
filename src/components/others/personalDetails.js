@@ -48,18 +48,19 @@ function PersonalDetails(props) {
   })
 
   const handleInput = (e) =>{
-      const {name, value} = e.target
-      setstate({
-          ...state,
-          [name] : value
-      })
+    console.log("typing")
+      // const {name, value} = e.target
+      // setstate({
+      //     ...state,
+      //     [name] : value
+      // })
+      // console.log(value)
   }
 
   const handleSubmit = e =>{
       e.preventDefault();
-
       setstate({
-          ... state,
+          ...state,
           showSuccess : true,
           hideAlert : true
       })
@@ -86,7 +87,7 @@ function PersonalDetails(props) {
 
   const hide = () =>{
       setstate({
-          ... state,
+          ...state,
         hideAlert : false,
       })
   }
@@ -109,13 +110,42 @@ function PersonalDetails(props) {
             <h6><b>Please fill in the detail to continue</b></h6>
         </div>
         <hr className="col-12 line"/>
-        <input text="text" required className="col-12" name="fullname" value={fullname} onChange={handleInput} placeholder="Enter fullname"/>
+        <input 
+          text="text" 
+          required 
+          className="col-12" 
+          name="fullname" value={fullname} 
+          onChange={handleInput} 
+          placeholder="Enter fullname"/>
        
-        <input text="text" required className="col-12" name="estate" value={estate} onChange={handleInput} placeholder="Enter estate"/>
+        <input 
+          text="text" 
+          required 
+          className="col-12" 
+          name="estate" value={estate} 
+          onChange={handleInput} 
+          placeholder="Enter estate"
+        />
        
-        <input text="text" required className="col-12" name="phonenumber" value={phonenumber} onChange={handleInput} placeholder="Enter your phone number"/>
+        <input 
+          text="text" 
+          required 
+          className="col-12" 
+          name="phonenumber" 
+          value={phonenumber} 
+          onChange={handleInput} 
+          placeholder="Enter your phone number"
+          />
         
-        <input text="text" required className="col-12" name="address" value={address} onChange={handleInput} placeholder="Enter your address"/>
+        <input 
+          text="text" 
+          required 
+          className="col-12" 
+          name="address" 
+          value={address} 
+          onChange={handleInput} 
+          placeholder="Enter your address"
+        />
        
         <button className="col-12" >CHECKOUT</button>
         </form>
