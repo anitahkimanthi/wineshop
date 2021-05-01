@@ -1,475 +1,471 @@
-.row{
-    margin: 0
+.row {
+  margin: 0;
 }
 
 /* main app styles */
-.App{
-    /* height: 100vh; */
-    background-color: #f0f0f0;
+.App {
+  /* height: 100vh; */
+  background-color: #f0f0f0;
 }
-.wrapper{
-    padding: 0;
-    height:100%
+.wrapper {
+  padding: 0;
+  height: 100%;
 }
 
 /* header section */
 
 /* topheader styles */
-.header .topheader a{
-    text-decoration: none;
-    color: #000000
+.header .topheader a {
+  text-decoration: none;
+  color: #000000;
 }
-.header{
-    background-color: #b45022;
+.header {
+  background-color: #b45022;
 }
-.productHeader{
-    padding: 0;
+.productHeader {
+  padding: 0;
 }
 
-.brand{
-    margin-bottom: -5px !important;
-    font-size: 7vh;
-    font-weight: 900;
+.brand {
+  margin-bottom: -5px !important;
+  font-size: 7vh;
+  font-weight: 900;
 }
-.productHeader .filter a{
-    flex-direction: column;
+.productHeader .filter a {
+  flex-direction: column;
 }
 
 /* filter header */
 
-.navItem1{
- position: relative;
+.navItem1 {
+  position: relative;
 }
-.navItem2{
-    position: relative;
-    margin-left: 40px;
+.navItem2 {
+  position: relative;
+  margin-left: 40px;
 }
-.filter{
-    position: relative;
+.filter {
+  position: relative;
 }
-.filter{
-    padding: 0;
-    color: #929292;
-    flex-grow: 1;
-    display: flex
+.filter {
+  padding: 0;
+  color: #929292;
+  flex-grow: 1;
+  display: flex;
 }
-.filter .category{
-    margin-right: 20px;
+.filter .category {
+  margin-right: 20px;
 }
-.filter .category button{
-    border: none;
-    width: 30%;
-    margin-right: 3%;
-    color: #868686
+.filter .category button {
+  border: none;
+  width: 30%;
+  margin-right: 3%;
+  color: #868686;
 }
-.filter a:hover{
-    text-decoration: none;
+.filter a:hover {
+  text-decoration: none;
 }
-.filter .orderby{
-    margin-right: 20px;
+.filter .orderby {
+  margin-right: 20px;
 }
-.filter .orderby button{
-    border: none;
-    background-color: #d1d1d1;
-    width: 35%;
-    margin-right: 4%;
-    color: #868686
+.filter .orderby button {
+  border: none;
+  background-color: #d1d1d1;
+  width: 35%;
+  margin-right: 4%;
+  color: #868686;
 }
-.filter .showall{
-    float: right;
-    text-align: right;
-}
-
-.filter a{
-    text-decoration: none;
-    color: inherit;
-    margin: 0 10px;
+.filter .showall {
+  float: right;
+  text-align: right;
 }
 
-@media only screen and (min-width: 567px) and (max-width:992px){ 
-    .popupmodal1{
-        left: 4% !important;
-    }
-    .popupmodal2{
-        left: 50% !important;
-    }
+.filter a {
+  text-decoration: none;
+  color: inherit;
+  margin: 0 10px;
 }
 
-@media only screen and (min-width: 996px) and (max-width:1200){ 
-    .popupmodal1{
-        left: 10% !important;
-    }
-    .popupmodal2{
-        left: 30% !important;
-    }
+@media only screen and (min-width: 567px) and (max-width: 992px) {
+  .popupmodal1 {
+    left: 4% !important;
+  }
+  .popupmodal2 {
+    left: 50% !important;
+  }
 }
 
-@media only screen and (min-width: 1200px){ 
-    .popupmodal1{
-        left: 10% !important;
-    }
-    .popupmodal2{
-        left: 18% !important;
-    }
-}
-.dropdown-menu{
-    top: 10px !important
-}
-.dropdown-menu li:hover{
-    background: #ebebeb;
-}
-.dropdown-toggle::after{
-    display: none;
+@media only screen and (min-width: 996px) and (max-width: 1200) {
+  .popupmodal1 {
+    left: 10% !important;
+  }
+  .popupmodal2 {
+    left: 30% !important;
+  }
 }
 
-
-.morecontent .modalItems span:hover{
-    color: #b45022
+@media only screen and (min-width: 1200px) {
+  .popupmodal1 {
+    left: 10% !important;
+  }
+  .popupmodal2 {
+    left: 18% !important;
+  }
+}
+.dropdown-menu {
+  top: 10px !important;
+}
+.dropdown-menu li:hover {
+  background: #ebebeb;
+}
+.dropdown-toggle::after {
+  display: none;
 }
 
-.morecontent .modalItems{
-    cursor: pointer;
+.morecontent .modalItems span:hover {
+  color: #b45022;
 }
 
-.col-md-10{
-    margin: 0 auto;
+.morecontent .modalItems {
+  cursor: pointer;
+}
+
+.col-md-10 {
+  margin: 0 auto;
 }
 
 /*products card items */
 
-@media only screen and (max-width: 567px){
-    .productHeader{
-        flex-direction: column;
-    }
-    .cartdiv{
-        width: 80%;
-        border-top: 1px solid #ccc;
-    }
-    .wrapper{
-        font-size: .5rem !important;
-    }
-    .header{
-        font-size: .5rem !important;
-    }
-    .filter{
-        font-size: .5rem !important;
-        width: 100%;
-    }
-    .filter .navItem1{
-        width: 100%;
-        text-align: center;
-    }
-    .filter .navItem2{
-        width: 100%;
-        text-align: center;
-    }
-    .cartdiv a{
-        width: 70%;
-    }
-    .bottles  h6{
-        font-size: 10px;
-    }
-    .empty button{
-        width: 100%;
-        margin-top: 5px;
-    }
-    .checkout button{
-        width: 100%;
-        margin-top: 5px;
-    }
-    .altotal .checkoutall button{
-        width: 100%;
-    }
-    .cartdiv{
-        padding-top: 15px !important;
-    }
-   
+@media only screen and (max-width: 567px) {
+  .productHeader {
+    flex-direction: column;
+  }
+  .cartdiv {
+    width: 80%;
+    border-top: 1px solid #ccc;
+  }
+  .wrapper {
+    font-size: 0.5rem !important;
+  }
+  .header {
+    font-size: 0.5rem !important;
+  }
+  .filter {
+    font-size: 0.5rem !important;
+    width: 100%;
+  }
+  .filter .navItem1 {
+    width: 100%;
+    text-align: center;
+  }
+  .filter .navItem2 {
+    width: 100%;
+    text-align: center;
+  }
+  .cartdiv a {
+    width: 70%;
+  }
+  .bottles h6 {
+    font-size: 10px;
+  }
+  .empty button {
+    width: 100%;
+    margin-top: 5px;
+  }
+  .checkout button {
+    width: 100%;
+    margin-top: 5px;
+  }
+  .altotal .checkoutall button {
+    width: 100%;
+  }
+  .cartdiv {
+    padding-top: 15px !important;
+  }
 }
 
 /* checkout styles */
-.checkoutall{
-    text-align: right;
+.checkoutall {
+  text-align: right;
 }
 
-.checkoutDetail{
-    position: absolute;
-    background-color: #ffffff !important;
-    border: 2px solid #000;
-    padding: 20px;
-    
+.checkoutDetail {
+  position: absolute;
+  background-color: #ffffff !important;
+  border: 2px solid #000;
+  padding: 20px;
 }
-.checkoutForm{
-    background-color: #ffffff;
-    padding: 20px
+.checkoutForm {
+  background-color: #ffffff;
+  padding: 20px;
 }
- .cartCheckout .title{
-    padding-top: 15px !important;
+.cartCheckout .title {
+  padding-top: 15px !important;
 }
-.cartdiv .cart{
-    margin-right: 20px;
+.cartdiv .cart {
+  margin-right: 20px;
 }
-.nopadding{
-    padding: 0
-}
-
-.cartdiv{
-    display: flex
+.nopadding {
+  padding: 0;
 }
 
-.cartdiv label{
-    margin-left: 10px;
-    color: #929292
+.cartdiv {
+  display: flex;
 }
-.productHeader{
-    background: #ffffff;
+
+.cartdiv label {
+  margin-left: 10px;
+  color: #929292;
+}
+.productHeader {
+  background: #ffffff;
 }
 
 /* wines section */
-@media only screen and (max-width: 778px){
-  
+@media only screen and (max-width: 778px) {
 }
 
-@media only screen and (min-width: 778px){
-    .content .bottles{
-        border-right: 1px solid #cccccc;
-    }
+@media only screen and (min-width: 778px) {
+  .content .bottles {
+    border-right: 1px solid #cccccc;
+  }
 }
 
 /* products styles */
-.ordersCards .bottles{
-    border : none
+.ordersCards .bottles {
+  border: none;
 }
-.error{
-    color: red
+.error {
+  color: red;
 }
-.winewrapper{
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-.content .cta{
-    display: flex;
-}
-.winewrapper button{
-    padding: 5px 2px;
-    border: none;
-    color: #ffffff;
-    margin-top: 20px;
+.winewrapper {
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
-.content .bottles{
-    padding: 0 10px;
+.content .cta {
+  display: flex;
 }
-.content .case{
-    padding: 0 10px;
-}
-.content .details{
-    background-color: #d8d8d8;
-    width: 80%;
-    margin-right: 5px;
-    color: #6e6e6e
-}
-.wrapper a{
-    color: #b45022
+.winewrapper button {
+  padding: 5px 2px;
+  border: none;
+  color: #ffffff;
+  margin-top: 20px;
 }
 
-.content .addtocart{
-    background-color: #b45022;
-    width: 98%;
+.content .bottles {
+  padding: 0 10px;
 }
-.cardcontent{
-    background-color: #fff;
-    height: 100%;
+.content .case {
+  padding: 0 10px;
 }
-.winewrapper .span{
-    text-align: center;
-    background-color: #ffffff;
-    color: red
+.content .details {
+  background-color: #d8d8d8;
+  width: 80%;
+  margin-right: 5px;
+  color: #6e6e6e;
 }
-.cardcontent .wineImage{
-    padding-left: 10px;
-    text-align: center;
-}
-.wineImage img{
-    margin: 10px 0 10px 0;
-    /* height: 100%; */
-    max-height: 230px;
-
-}
-.winewrapper .card-body{
-    padding: 15px;
-}
-.winewrapper .name{
-    font-size: 14px;
-}
-.winewrapper .number{
-    font-size: 25px;
-}
-.winewrapper p{
-    font-size: 14px;
-}
-.winewrapper .quantity, input{
-    font-size: 12px;
-    margin-left: 10px
-}
-.winewrapper .card-title{
-    color:#6e6e6e
-}
-.winewrapper p, span, input{
-    color: #6e6e6e;
+.wrapper a {
+  color: #b45022;
 }
 
-.header hr{
-    margin-bottom: 0;
-    margin-top:10px
+.content .addtocart {
+  background-color: #b45022;
+  width: 98%;
 }
-.cardwrapper{
-    background-clip: border-box;
-    padding-right: 5px;
-    padding-left: 5px;
-    margin-top: 10px;
+.cardcontent {
+  background-color: #fff;
+  height: 100%;
 }
-.winewrapper input{
-    width: 45%;
-    
+.winewrapper .span {
+  text-align: center;
+  background-color: #ffffff;
+  color: red;
+}
+.cardcontent .wineImage {
+  padding-left: 10px;
+  text-align: center;
+}
+.wineImage img {
+  margin: 10px 0 10px 0;
+  /* height: 100%; */
+  max-height: 230px;
+}
+.winewrapper .card-body {
+  padding: 15px;
+}
+.winewrapper .name {
+  font-size: 14px;
+}
+.winewrapper .number {
+  font-size: 25px;
+}
+.winewrapper p {
+  font-size: 14px;
+}
+.winewrapper .quantity,
+input {
+  font-size: 12px;
+  margin-left: 10px;
+}
+.winewrapper .card-title {
+  color: #6e6e6e;
+}
+.winewrapper p,
+span,
+input {
+  color: #6e6e6e;
+}
+
+.header hr {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+.cardwrapper {
+  background-clip: border-box;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-top: 10px;
+}
+.winewrapper input {
+  width: 45%;
 }
 
 /* details */
-.details{
-    margin-top: 20px;
+.details {
+  margin-top: 20px;
 }
-.details .cardwrapper{
-    margin: 0 auto;
+.details .cardwrapper {
+  margin: 0 auto;
 }
 
 /* add to cart */
-.addtocartcard{
-    margin-bottom: 10px;
+.addtocartcard {
+  margin-bottom: 10px;
 }
-.altotal .price{
-    color: #b45022;
-    text-align: right;
+.altotal .price {
+  color: #b45022;
+  text-align: right;
 }
-.addtocartcard hr{
-    margin-bottom: 0;
-    margin-top:-2px
+.addtocartcard hr {
+  margin-bottom: 0;
+  margin-top: -2px;
 }
-.addtocartcard .section{
-    border-right: 1px solid #ccc;
+.addtocartcard .section {
+  border-right: 1px solid #ccc;
 }
-.calc{
-    padding: 10px !important
+.calc {
+  padding: 10px !important;
 }
-.product_total{
-    padding: 10px !important
-
+.product_total {
+  padding: 10px !important;
 }
-.price_total{
-    text-align: right;
+.price_total {
+  text-align: right;
 }
-.price_total h4{
-    padding: 10px 0
+.price_total h4 {
+  padding: 10px 0;
 }
-.cart{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #6e6e6e
+.cart {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #6e6e6e;
 }
-.card .price{
-    text-align: center;
+.card .price {
+  text-align: center;
 }
-.cart .checkout{
-    text-align: right;
+.cart .checkout {
+  text-align: right;
 }
-.cart .empty{
-    text-align: right;
+.cart .empty {
+  text-align: right;
 }
-.cart p{
-    padding: 10%
+.cart p {
+  padding: 10%;
 }
-.cart .bottles{
-    padding-top:5%;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.cart button{
-    border: none;
-    padding: 5px 10px;
-}
-.cart .cta{
-    background-color: #b45022 !important;
-    color: #ffffff
-}
-.checkoutall .price{
-    color: #b45022
-}
-.addtocartcard .title{
-    margin-top:10px
-}
-.checkoutForm input{
-padding: 4px 10px;
-margin-bottom: 10px;
+.cart .bottles {
+  padding-top: 5%;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-.checkoutForm button{
-    padding: 5px;
-    background-color: #b45022;
-    border: none;
-    color: #fff;
-    margin-top: 10px;
+.cart button {
+  border: none;
+  padding: 5px 10px;
 }
-.checkoutForm hr{
-    margin: 7 !important;
+.cart .cta {
+  background-color: #b45022 !important;
+  color: #ffffff;
 }
-.checkoutForm h6{
-    margin-bottom: 0 !important;
+.checkoutall .price {
+  color: #b45022;
+}
+.addtocartcard .title {
+  margin-top: 10px;
+}
+.checkoutForm input {
+  padding: 4px 10px;
+  margin-bottom: 10px;
 }
 
-.checkoutForm .ordernote{
-    margin-top: 20px;
+.checkoutForm button {
+  padding: 5px;
+  background-color: #b45022;
+  border: none;
+  color: #fff;
+  margin-top: 10px;
 }
-.checkoutForm .ordernote{
-background-color: #d1d1d1;
+.checkoutForm hr {
+  margin: 7 !important;
 }
-.alert{
-    margin-bottom: 10px;
-    margin-top:10px
+.checkoutForm h6 {
+  margin-bottom: 0 !important;
 }
-.orderWrapper{
-    margin-bottom: 10px !important;
-    margin-top: 0;
+
+.checkoutForm .ordernote {
+  margin-top: 20px;
 }
-.orderWrapper .cardwrapper{
-    margin-top: 0;
+.checkoutForm .ordernote {
+  background-color: #d1d1d1;
+}
+.alert {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.orderWrapper {
+  margin-bottom: 10px !important;
+  margin-top: 0;
+}
+.orderWrapper .cardwrapper {
+  margin-top: 0;
 }
 
 /* delivery  */
 .deliverInfo {
-    background-color: #f1f1f1;
-    padding: 10px; 
-    margin: 15px 0
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 15px 0;
 }
-.delivery span{
-    color: #b45022
+.delivery span {
+  color: #b45022;
 }
 
 /* .footer styles */
-.footer{
-    background: #ffffff;
-    color:#5c5c5c;
-    position: relative;
-    bottom: 0;
-    margin-top: 5%;
+.footer {
+  background: #ffffff;
+  color: #5c5c5c;
+  position: relative;
+  bottom: 0;
+  margin-top: 5%;
 }
 
 /* empty orders */
-.empty-orders{
-    cursor: pointer;
-    margin-top: 20px;
+.empty-orders {
+  cursor: pointer;
+  margin-top: 20px;
 }
-.empty-orders span{
-    background-color: #b45022;
-    color: #ffffff;
-    padding: 5px 30px
+.empty-orders span {
+  background-color: #b45022;
+  color: #ffffff;
+  padding: 5px 30px;
 }
