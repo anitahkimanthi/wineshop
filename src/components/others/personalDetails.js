@@ -85,13 +85,14 @@ function PersonalDetails (props) {
     }
   ]
 
-  console.log(props.open)
-
   const body = (
-    <div className='checkoutDetails row justify-content-center h-100'>
+    <div
+      className='checkoutDetails row justify-content-center h-100'
+      onClose={props.handleClose}
+    >
       {!showSuccess ? (
         <div className='col-12 col-md-4 my-auto'>
-          <form onSubmit={handleSubmit} className='checkoutForm '>
+          <form onSubmit={handleSubmit} className='checkoutForm row'>
             <div className='col-12 nopadding'>
               <h6>
                 <b>Please fill in the detail to continue</b>
@@ -138,7 +139,14 @@ function PersonalDetails (props) {
               placeholder='Enter your address'
             />
 
-            <button className='col-12'>CHECKOUT</button>
+            <button
+              className='col-12 col-sm-5 cancel '
+              onClick={props.handleClose}
+            >
+              CANCEL
+            </button>
+            <div className='col-12 col-sm-2'></div>
+            <button className='col-12 col-sm-5 '>CHECKOUT</button>
           </form>
         </div>
       ) : (
