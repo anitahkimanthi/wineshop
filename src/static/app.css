@@ -78,6 +78,8 @@
 
 .brand{
     margin-bottom: -5px !important;
+    font-size: 7vh;
+    font-weight: 900;
 }
 .col-md-10{
     margin: 0 auto;
@@ -98,8 +100,50 @@
         width: 80%;
         border-top: 1px solid #ccc;
     }
+    .wrapper{
+        font-size: .5rem !important;
+    }
+    .header{
+        font-size: .5rem !important;
+    }
+    .filter{
+        font-size: .5rem !important;
+        width: 100%;
+    }
+    .filter .navItem1{
+        width: 100%;
+        text-align: center;
+    }
+    .filter .navItem2{
+        width: 100%;
+        text-align: center;
+    }
+    .cartdiv a{
+        width: 70%;
+    }
+    .bottles  h6{
+        font-size: 10px;
+    }
+    .empty button{
+        width: 100%;
+        margin-top: 5px;
+    }
+    .checkout button{
+        width: 100%;
+        margin-top: 5px;
+    }
+    .altotal .checkoutall button{
+        width: 100%;
+    }
+    .cartdiv{
+        padding-top: 15px !important;
+    }
+   
 }
 
+ .cartCheckout .title{
+    padding-top: 15px !important;
+}
 .productHeader .filter a{
     flex-direction: column;
 }
@@ -232,7 +276,7 @@
 .wineImage img{
     margin: 10px 0 10px 0;
     /* height: 100%; */
-    height: 230px;
+    max-height: 230px;
 
 }
 .winewrapper .card-body{
