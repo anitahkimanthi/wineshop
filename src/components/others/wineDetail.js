@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
     addToCart,
-    fetchWines
+    fetchWines,
+    cartItemsCalculations
 } from "../redux/actions/actions";
 import {connect} from "react-redux";
 
@@ -28,42 +29,50 @@ function WineDetail (props) {
         }
 
         props.addToCart(d, userData)
+        props.cartItemsCalculations()
     }
 
-    // handle user inputs and change state
-    const handleBottleQuantityInput = (e) =>{
-        // set state on change of value
-        const {value} = e.target
+   // handle user inputs and change state
+   const handleBottleQuantityInput = (e) => {
+    // set state on change of value
+    const { value } = e.target
 
-        // do the calculations as input change
-        const bottlePrice = e.currentTarget.id
-        const bottlePriceCalc = value * bottlePrice
+    // do the calculations as input change
+    const bottlePrice = e.currentTarget.id
 
-        // setting values to state
-        setState({
-            ...state,
-            bottleQuantity : value,
-            bottleTotals : bottlePriceCalc
-        })
-    }
+    const bottlePriceCalc = value * bottlePrice
 
-    // handle user inputs and change state
-    const handleCaseQuantityInput = (e) =>{
-        // set state on change of value
-        const {value} = e.target
+    // convert to two decimals
+    const price = parseFloat(bottlePriceCalc).toFixed(2)
 
-        // do the calculations as input change
-        const casePrice = e.currentTarget.id
-        
-        const casePriceCalc = value * casePrice
-        
-        // setting the values to state
-        setState({
-            ...state,
-            caseQuantity : value,
-            caseTotals : casePriceCalc
-        })
-    }
+    // setting values to state
+    setState({
+        ...state,
+        bottleQuantity: value,
+        bottleTotals: price,
+    })
+}
+
+// handle user inputs and change state
+const handleCaseQuantityInput = (e) => {
+    // set state on change of value
+    const { value } = e.target
+
+    // do the calculations as input change
+    const casePrice = e.currentTarget.id
+
+    const casePriceCalc = value * casePrice
+
+    // convert to two decimals
+    const price = parseFloat(casePriceCalc).toFixed(2)
+
+    // setting the values to state
+    setState({
+        ...state,
+        caseQuantity: value,
+        caseTotals: price
+    })
+}
     const query = new URLSearchParams(props.location.search)
     const searchKeyWord = query.get("name").toString()
 
@@ -159,4 +168,4 @@ const mapStateToProps = (state) =>({
     
 })
 
-export default connect(mapStateToProps, { fetchWines,addToCart})(WineDetail)
+export default connect(mapStateToProps, { fetchWines,addToCart, cartItemsCalculations})(WineDetail)

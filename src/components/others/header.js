@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from "react-router";
-import { Link, NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -45,15 +45,15 @@ function Header(props) {
                 <Toolbar className="productHeader">
                     <List className="filter">
                         <div className="navItem1">
-                            <NavLink to="/filter" 
-                                activeClassName="active" 
+                            <div 
+                                className="active" 
                                 id="popup1" 
                                 data-toggle="dropdown" 
                                 aria-haspopup="true" 
                                 aria-expanded="false"
                             >
                                 All Catergories <ExpandMoreIcon />
-                            </NavLink>
+                            </div>
 
                             <div
                                 className="dropdown-menu" 
@@ -104,16 +104,15 @@ function Header(props) {
                         </div>
 
                         <div className="navItem2">
-                            <NavLink 
-                                to="/orderby" 
-                                activeClassName="active" 
+                            <div 
+                                className="active" 
                                 id="popup2" 
                                 data-toggle="dropdown" 
                                 aria-haspopup="true" 
                                 aria-expanded="false"
                             >
                                 Order by <ExpandMoreIcon />
-                            </NavLink>
+                            </div>
                             <div
                                 className="dropdown-menu" 
                                 aria-labelledby="popup2"

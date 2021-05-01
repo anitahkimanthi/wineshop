@@ -13,15 +13,79 @@
 }
 
 /* header section */
-.morecontent .modalItems{
-    cursor: pointer;
+
+/* topheader styles */
+.header .topheader a{
+    text-decoration: none;
+    color: #000000
 }
+.header{
+    background-color: #b45022;
+}
+.productHeader{
+    padding: 0;
+}
+
+.brand{
+    margin-bottom: -5px !important;
+    font-size: 7vh;
+    font-weight: 900;
+}
+.productHeader .filter a{
+    flex-direction: column;
+}
+
+/* filter header */
+
 .navItem1{
  position: relative;
 }
 .navItem2{
     position: relative;
+    margin-left: 40px;
 }
+.filter{
+    position: relative;
+}
+.filter{
+    padding: 0;
+    color: #929292;
+    flex-grow: 1;
+    display: flex
+}
+.filter .category{
+    margin-right: 20px;
+}
+.filter .category button{
+    border: none;
+    width: 30%;
+    margin-right: 3%;
+    color: #868686
+}
+.filter a:hover{
+    text-decoration: none;
+}
+.filter .orderby{
+    margin-right: 20px;
+}
+.filter .orderby button{
+    border: none;
+    background-color: #d1d1d1;
+    width: 35%;
+    margin-right: 4%;
+    color: #868686
+}
+.filter .showall{
+    float: right;
+    text-align: right;
+}
+
+.filter a{
+    text-decoration: none;
+    color: inherit;
+    margin: 0 10px;
+}
+
 @media only screen and (min-width: 567px) and (max-width:992px){ 
     .popupmodal1{
         left: 4% !important;
@@ -57,41 +121,22 @@
 .dropdown-toggle::after{
     display: none;
 }
-.filter{
-    position: relative;
-}
+
 
 .morecontent .modalItems span:hover{
     color: #b45022
 }
 
-.header .topheader a{
- text-decoration: none;
- color: #000000
-}
-.header{
-    background-color: #b45022;
-}
-.productHeader{
-    padding: 0;
+.morecontent .modalItems{
+    cursor: pointer;
 }
 
-.brand{
-    margin-bottom: -5px !important;
-    font-size: 7vh;
-    font-weight: 900;
-}
 .col-md-10{
     margin: 0 auto;
 }
 
-/* filter section and cart */
-.filter{
-    padding: 0;
-    color: #929292;
-    flex-grow: 1;
-    display: flex
-}
+/*products card items */
+
 @media only screen and (max-width: 567px){
     .productHeader{
         flex-direction: column;
@@ -141,60 +186,30 @@
    
 }
 
+/* checkout styles */
+.checkoutall{
+    text-align: right;
+}
+
+.checkoutDetail{
+    position: absolute;
+    background-color: #ffffff !important;
+    border: 2px solid #000;
+    padding: 20px;
+    
+}
+.checkoutForm{
+    background-color: #ffffff;
+    padding: 20px
+}
  .cartCheckout .title{
     padding-top: 15px !important;
 }
-.productHeader .filter a{
-    flex-direction: column;
-}
-.filter a{
-    text-decoration: none;
-    color: inherit;
-    margin: 0 10px;
-}
-.filter a:hover{
-    text-decoration: none;
-}
-
 .cartdiv .cart{
     margin-right: 20px;
 }
 .nopadding{
     padding: 0
-}
-.header .filterheader a{
-    text-decoration: none;
-    color: #868686;
-    padding: 10px;
-
-}
-.header .filterheader .active{
-    background-color: #ececec;
-    color: #b45022 !important
-}
-
-.filter .category{
-    margin-right: 20px;
-}
-.filter .category button{
-    border: none;
-    width: 30%;
-    margin-right: 3%;
-    color: #868686
-}
-.filter .orderby{
-    margin-right: 20px;
-}
-.filter .orderby button{
-    border: none;
-    background-color: #d1d1d1;
-    width: 35%;
-    margin-right: 4%;
-    color: #868686
-}
-.filter .showall{
-    float: right;
-    text-align: right;
 }
 
 .cartdiv{
@@ -219,6 +234,8 @@
         border-right: 1px solid #cccccc;
     }
 }
+
+/* products styles */
 .ordersCards .bottles{
     border : none
 }
@@ -391,8 +408,8 @@
     margin-top:10px
 }
 .checkoutForm input{
-margin-top: 10px;
 padding: 4px 10px;
+margin-bottom: 10px;
 }
 
 .checkoutForm button{
@@ -419,6 +436,13 @@ background-color: #d1d1d1;
     margin-bottom: 10px;
     margin-top:10px
 }
+.orderWrapper{
+    margin-bottom: 10px !important;
+    margin-top: 0;
+}
+.orderWrapper .cardwrapper{
+    margin-top: 0;
+}
 
 /* delivery  */
 .deliverInfo {
@@ -436,4 +460,16 @@ background-color: #d1d1d1;
     color:#5c5c5c;
     position: relative;
     bottom: 0;
+    margin-top: 5%;
+}
+
+/* empty orders */
+.empty-orders{
+    cursor: pointer;
+    margin-top: 20px;
+}
+.empty-orders span{
+    background-color: #b45022;
+    color: #ffffff;
+    padding: 5px 30px
 }

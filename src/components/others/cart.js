@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import CheckoutInfo from "./personalDetails"
-import store from "../redux/store"
-import {cartItemsCalculations} from "../redux/actions/actions"
-import {
-    CARTITEMS
-} from "../redux/actions/types";
+import {emptyCart, cartItemsCalculations} from "../redux/actions/actions"
 
 
 function Cart (props){
@@ -13,33 +9,25 @@ function Cart (props){
         open : false,
         cartItem : null,
     })
-    const {totalPrice, cart,cartItemsCalculations} = props
+    
+    const {totalPrice, cart,emptyCart, cartItemsCalculations} = props
+
 
     const handleCheckout = (c) => {
         setState({
             open : true,
-            cartItem : c 
+            cartItem : c,
         });
     };
-    
     
     const handleClose = () => {
         setState({open : false});
     };
 
-    const emptyCart = (index) =>{
-        const getLocalData = JSON.parse(localStorage.getItem("cartproducts"))
-
-        const newCart = getLocalData.filter((d, i) => d.name !== index)
-
-        localStorage.setItem("cartproducts", JSON.stringify(newCart))
-        
-        store.dispatch({
-            type: CARTITEMS,
-            payload: newCart === null ? cart: newCart,
-        })
-
-        cartItemsCalculations();
+    const empty = (name) =>{
+        console.log(name)
+        emptyCart(name)
+        cartItemsCalculations()
     }
 
     const handleCheckoutAll = () =>{
@@ -60,7 +48,7 @@ function Cart (props){
                 <div className="col-2 col-md-3 section">
                     <div className="bottles">
                        {c.bottleQuantity}
-                        <h6>Bottles</h6> 
+                        <h6>Bottle(s)</h6> 
                     </div>
                 </div>
                 <div className="col-6 col-md-5">
@@ -71,16 +59,16 @@ function Cart (props){
                                 {c.id} {c.name}
                                 </b>
                             </h6>
-                            <small>{c.bottleQuantity} * {c.price}</small>
+                            <small>{c.bottleQuantity} * {c.price.toFixed(2)}</small>
                         </li>
                         <li className="list-unstyled empty col-12 col-sm-6 ">
-                        <button onClick={() => emptyCart(c.name)}>Empty cart</button>
+                        <button onClick={() => empty(c.name)}>Empty cart</button>
                         </li>
                     </ul>
                     <hr/>
                     <ul className="product_total row">
                         <li className="list-unstyled col-12 col-sm-6 price">
-                               Total = $ {c.totals} 
+                               Total = $ {c.totals.toFixed(2)} 
                         </li>
                         <li className="list-unstyled checkout col-12 col-sm-6 ">
                             <button className="cta" onClick={ ()=> handleCheckout(c)}>Checkout</button>
@@ -92,7 +80,7 @@ function Cart (props){
     )
 
     return(
-        <div className="row cart"onClose={handleClose}>
+        <div className="row cart" onClose={handleClose}>
 
                 {cart.length !== 0 ? cartData : <div className="col-12 text-center">No items added</div>}
 
@@ -105,7 +93,7 @@ function Cart (props){
                         <div className="col-8 col-sm-5 col-md-7price_total">
                             <ul className="product_total altotal row">
                             <li className="list-unstyled price col-12 col-md-6">
-                                <h3><b>$ {totalPrice}</b></h3>
+                                <h3><b>$ {(Math.round(totalPrice * 100) / 100).toFixed(2)}</b></h3>
                             </li>
                             <li className="list-unstyled checkoutall col-12 col-md-6">
                                 <button className="cta" onClick={handleCheckoutAll}>Checkout all </button>
@@ -129,4 +117,4 @@ const mapStateToProps = (state) =>({
     totalPrice : state.calculations.priceTotals
 })
 
-export default connect(mapStateToProps,{cartItemsCalculations})(Cart)
+export default connect(mapStateToProps,{cartItemsCalculations, emptyCart})(Cart)

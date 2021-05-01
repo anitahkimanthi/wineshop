@@ -1,41 +1,14 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux"
 import {withRouter} from "react-router"
-import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Alert from '@material-ui/lab/Alert';
-import {ordersAction,checkoutRequiredInfo} from "../redux/actions/actions";
+import {ordersAction,checkoutRequiredInfo, emptyCart} from "../redux/actions/actions";
 import {Link} from "react-router-dom"
-
-
-const modalStyles =() =>{
-   
-    const top = 50 ;
-    const left = 50 ;
-
-    return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
-    };
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 500,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
 
 function PersonalDetails(props) {
 
-  const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(modalStyles);
   
   const [state, setstate] = useState({
       fullname : "",
@@ -70,7 +43,8 @@ function PersonalDetails(props) {
             address : address,
             orderno: 123456
         }
-
+      
+      props.emptyCart(props.cartItem.name)
       props.ordersAction(props.cartItem)
       props.checkoutRequiredInfo(userInfo)
   }
@@ -100,10 +74,14 @@ function PersonalDetails(props) {
             orderno: 123456
         }
     ]
+    
+    console.log(props.open)
+    
   const body = (
-    <div style={modalStyle} xs={12} md={6} className={classes.paper}>
+    <div className="checkoutDetails row justify-content-center h-100">
     {!showSuccess ?
-      <form onSubmit={handleSubmit} className="checkoutForm row ">
+      <div className="col-12 col-md-4 my-auto">
+      <form onSubmit={handleSubmit} className="checkoutForm ">
         <div className="col-12 nopadding">
             <h6><b>Please fill in the detail to continue</b></h6>
         </div>
@@ -112,7 +90,8 @@ function PersonalDetails(props) {
           text="text" 
           required 
           className="col-12" 
-          name="fullname" value={fullname} 
+          name="fullname" 
+          value={state.fullname} 
           onChange={handleInput} 
           placeholder="Enter fullname"/>
        
@@ -120,7 +99,8 @@ function PersonalDetails(props) {
           text="text" 
           required 
           className="col-12" 
-          name="estate" value={estate} 
+          name="estate" 
+          value={state.estate} 
           onChange={handleInput} 
           placeholder="Enter estate"
         />
@@ -130,7 +110,7 @@ function PersonalDetails(props) {
           required 
           className="col-12" 
           name="phonenumber" 
-          value={phonenumber} 
+          value={state.phonenumber} 
           onChange={handleInput} 
           placeholder="Enter your phone number"
           />
@@ -140,16 +120,17 @@ function PersonalDetails(props) {
           required 
           className="col-12" 
           name="address" 
-          value={address} 
+          value={state.address} 
           onChange={handleInput} 
           placeholder="Enter your address"
         />
        
         <button className="col-12" >CHECKOUT</button>
         </form>
+        </div>
         :
         
-        <div className="col-12 ordernote checkoutForm">
+        <div className="col-12 col-md-4 ordernote checkoutForm my-auto">
             <div className="row">
                 {hideAlert &&
                     <Alert severity="success" className="alert" onClick={hide}>Thank you for shopping wiht us!</Alert>
@@ -157,7 +138,7 @@ function PersonalDetails(props) {
                 <h6><b>Check your delivery information :</b></h6>
         
                 {deliverynot.map((d,i) =>
-                <div className="col-12 deliverInfo">
+                <div className="col-12 deliverInfo" key={i}>
                     <p key={i}>Order name : <b>{d.name}</b></p>
                     <p key={i}>Address : <b>{d.address}</b></p>
                     <p key={i}>Your phone number : <b>{d.phone}</b></p>
@@ -198,4 +179,4 @@ const mapStateToProps = (state) =>({
 })
     
 
-export default withRouter(connect(mapStateToProps, {ordersAction,checkoutRequiredInfo})(PersonalDetails))
+export default withRouter(connect(mapStateToProps, {ordersAction,emptyCart, checkoutRequiredInfo})(PersonalDetails))
