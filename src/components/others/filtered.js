@@ -118,7 +118,6 @@ function Filter (props) {
                 <h5 className='card-title row'>
                   <b className='col-12'>
                     <span className='number'>{d.no}</span>
-                    col-9 col-sm-4 col-9 col-sm-4
                     <br />
                     <span className='name'>{d.name}</span>
                   </b>
