@@ -95,7 +95,7 @@ function Wines (props) {
   // defining the cases of the clicked item to defferentiate between the case and bottles quantities
   const casetitle = 'case'
 
-  if (error === '') {
+  if (error === '' && wines) {
     const winesData = wines.map((d, i) => (
       <div className='col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper' key={i}>
         <div className='no-gutters row cardcontent'>
