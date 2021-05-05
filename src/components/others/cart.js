@@ -104,9 +104,11 @@ function Cart (props) {
                   </h3>
                 </li>
                 <li className='list-unstyled checkoutall col-12 col-md-6'>
+                  {cart.length === "1" && 
                   <button className='cta' onClick={handleCheckoutAll}>
                     Checkout all{' '}
                   </button>
+                  }
                 </li>
               </ul>
             </div>
