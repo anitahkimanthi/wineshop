@@ -23,7 +23,6 @@ function Cart (props) {
   }
 
   const empty = name => {
-    console.log(name)
     emptyCart(name)
     cartItemsCalculations()
   }

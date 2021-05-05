@@ -72,8 +72,6 @@ export const emptyCart = name => dispatch => {
 
   const newCart = cartItems.filter(d => d.name !== name)
 
-  console.log(newCart)
-
   localStorage.setItem('cartproducts', JSON.stringify(newCart))
 
   // check if the product already exist

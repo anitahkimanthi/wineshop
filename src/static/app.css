@@ -19,6 +19,7 @@
   text-decoration: none;
   color: #000000;
 }
+
 .header {
   background-color: #b45022;
 }
@@ -31,6 +32,7 @@
   font-size: 6vh;
   font-weight: 900;
 }
+
 .productHeader .filter a {
   flex-direction: column;
 }
