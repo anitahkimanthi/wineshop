@@ -17,7 +17,12 @@ function Header (props) {
   const wineCategory = e => {
     // e.currentTarget.id
     const id = e.currentTarget.id.toString()
-    props.history.push(`/categories/?tag=${id}`)
+
+    if(id === "price"){
+      props.history.push("/?price")
+    } else{
+      props.history.push(`/categories/?category=${id}`)
+    }
   }
 
   return (

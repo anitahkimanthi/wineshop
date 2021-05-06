@@ -6,6 +6,7 @@ import {
   cartItemsCalculations
 } from '../redux/actions/actions'
 import { connect } from 'react-redux'
+import FilterByPrice from './filterbyprice'
 
 function Wines (props) {
   const [state, setState] = useState({
@@ -14,14 +15,47 @@ function Wines (props) {
     bottleTotals: 0,
     caseTotals: 0,
     index: 0,
+    max_price: "",
+    min_price: "",
     title: ''
   })
 
   const { imageUrl, wines, error, fetchWines } = props
+  const query = new URLSearchParams(props.location.search)
 
   useEffect(() => {
     fetchWines()
-  })
+
+    const query = new URLSearchParams(props.location.search)
+    const highprice = query.get('max_price')
+    const lowprice = query.get('min_price')
+
+    // set the price to state
+    setState({
+      ...state,
+      max_price: highprice,
+      min_price: lowprice
+    })
+  }, [fetchWines, props.location.search, state])
+
+  // allow typing
+  const handleInput = e => {
+    const { value, name } = e.target
+    setState({
+      ...state,
+      [name]: value
+    })
+
+  }
+
+  // onclick search button or enter go to filter by price component and show the product
+  const handleSearch = () => {
+    const { min_price, max_price } = state
+    const low = min_price === null ? 0 : min_price
+    const high = max_price === null ? 0 : max_price
+
+    props.history.push(`/price/?min_price=${low}&max_price=${high}`)
+  }
   // redirect to the detail page
   const ShowDetails = d => {
     props.history.push(`/wines/?name=${d.name.toLowerCase()}`)
@@ -184,7 +218,36 @@ function Wines (props) {
         </div>
       </div>
     ))
-    return <div className='row winewrapper allwines'>{winesData}</div>
+    return (
+      <div className='row winewrapper allwines'>
+        {query.has('price') || query.has('max_price') ? (
+          <div className='col-12'>
+            <form className='pricerange' onSubmit={handleSearch}>
+              <label>Min price</label>
+              <input
+                type='number'
+                name='min_price'
+                placeholder='Enter price'
+                value={state.min_price}
+                onChange={handleInput}
+              />
+              <label>Max price</label>
+              <input
+                type='number'
+                name='max_price'
+                placeholder='Enter price'
+                value={state.max_price}
+                onChange={handleInput}
+              />
+              <input type='submit' value='Search' className='send' />
+            </form>
+          </div>
+        ) : (
+          ''
+        )}
+        {query.has('max_price') ? <FilterByPrice/> : winesData}
+      </div>
+    )
   }
   return (
     <div className='row card winewrapper'>

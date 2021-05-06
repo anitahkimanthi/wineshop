@@ -95,10 +95,11 @@ function Filter (props) {
   if (wines) {
     const query = new URLSearchParams(props.location.search)
 
-    const searchKeyWord = query.get('category').toString()
+    const highprice = query.get('max_price')
+    const lowprice = query.get('min_price')
 
-    const filteredData = wines.filter(w =>
-      w.tags.some(t => t.toLowerCase() === searchKeyWord)
+    const filteredData = wines.filter(
+      w => w.cost.bottle >= lowprice && w.cost.bottle<= highprice
     )
 
     if (filteredData.length !== 0) {
@@ -190,16 +191,12 @@ function Filter (props) {
           </div>
         </div>
       ))
-      return (
-        <div className='row winewrapper allwines'>
-          {products}
-        </div>
-      )
+      return products
     }
     return (
       <div className='row winewrapper allwines'>
         <div className='col-12 text-center'>
-          No result, choose another category
+          No result of the price range, choose another range
         </div>
       </div>
     )

@@ -15,7 +15,7 @@ import Home from "./components/others/allwines";
 import WineDetail from "./components/others/wineDetail";
 import Cart from "./components/others/cart";
 import Orders from "./components/others/orders";
-import Filter from "./components/others/filtered";
+import FilterByCategory from "./components/others/filtered";
 import store from "./components/redux/store";
 import Error from "./components/others/notfound";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -84,7 +84,8 @@ const App = () => {
                     <Route path="/orders" component={Orders}/>
                     <Route path="/orderby" component={Home}/>
                     <Route path="/wines" component={WineDetail}/>
-                    <Route path="/categories" component={Filter}/>
+                    <Route path="/categories" component={FilterByCategory}/>
+                    <Route path="/price" component={Home}/>
                     <Route path="/cart" component={Cart}/>
                     <Route component={Error}/>
                 </Switch>
