@@ -57,7 +57,7 @@ function Cart (props) {
                 </b>
               </h6>
               <small>
-                {c.bottleQuantity} * {c.price.toFixed(2)}
+                {c.bottleQuantity} * { (Math.round(c.price * 100) / 100).toFixed(2)}
               </small>
             </li>
             <li className='list-unstyled empty col-12 col-sm-6 '>
@@ -67,7 +67,7 @@ function Cart (props) {
           <hr />
           <ul className='product_total row'>
             <li className='list-unstyled col-12 col-sm-6 price'>
-              Total = $ {c.totals.toFixed(2)}
+              Total = $ {(Math.round(c.totals * 100) / 100).toFixed(2)}
             </li>
             <li className='list-unstyled checkout col-12 col-sm-6 '>
               <button className='cta' onClick={() => handleCheckout(c)}>

@@ -25,8 +25,6 @@ function Wines (props) {
 
   useEffect(() => {
     fetchWines()
-
-    const query = new URLSearchParams(props.location.search)
     const highprice = query.get('max_price')
     const lowprice = query.get('min_price')
 
@@ -36,7 +34,7 @@ function Wines (props) {
       max_price: highprice,
       min_price: lowprice
     })
-  }, [fetchWines, props.location.search, state])
+  }, [fetchWines, props.location.search])
 
   // allow typing
   const handleInput = e => {
@@ -45,11 +43,12 @@ function Wines (props) {
       ...state,
       [name]: value
     })
-
   }
 
   // onclick search button or enter go to filter by price component and show the product
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    
     const { min_price, max_price } = state
     const low = min_price === null ? 0 : min_price
     const high = max_price === null ? 0 : max_price
@@ -129,6 +128,8 @@ function Wines (props) {
   // defining the cases of the clicked item to defferentiate between the case and bottles quantities
   const casetitle = 'case'
 
+  const {bottleTotals, caseTotals, bottleQuantity, caseQuantity} = state
+
   if (error === '' && wines) {
     const winesData = wines.map((d, i) => (
       <div className='col-12 col-sm-6 col-md-6 col-lg-4 cardwrapper' key={i}>
@@ -155,10 +156,10 @@ function Wines (props) {
 
                   {state.index === i ? (
                     <p>
-                      {state.bottleQuantity === 1 ? (
+                      {bottleQuantity === 1 ? (
                         <span>$ {d.cost.bottle.toFixed(2)}</span>
                       ) : (
-                        <span>$ {state.bottleTotals}</span>
+                        <span>$ {bottleTotals}</span>
                       )}
                     </p>
                   ) : (
@@ -180,10 +181,10 @@ function Wines (props) {
                   </h6>
                   {state.title === 'case' && state.index === i ? (
                     <p>
-                      {state.caseQuantity === 1 ? (
+                      {caseQuantity === 1 ? (
                         <span>$ {d.cost.case.toFixed(2)}</span>
                       ) : (
-                        <span>$ {state.caseTotals}</span>
+                        <span>$ {caseTotals}</span>
                       )}
                     </p>
                   ) : (
